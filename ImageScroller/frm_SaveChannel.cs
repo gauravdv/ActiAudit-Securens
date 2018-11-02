@@ -12,16 +12,29 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Threading;
+using System.Net;
 
 namespace ImageScroller
 {
     public partial class frm_SaveChannel : Form
     {
-       
-        Bitmap LoadImg = Properties.Resources.btn_Load; // Set PlayBlue Image
-        Bitmap CheckImg = Properties.Resources.btn_Check; // Set PlayBlue Image
-        Bitmap LoadSImg = Properties.Resources.btn_LoadS; // Set PlayBlue Image
+        int X_Mouse;
+        int Y_Mouse;
+
         Bitmap LoadBigImg = Properties.Resources.btn_LoadBig; // Set PlayBlue Image
+
+        Bitmap BrowseGryImg = Properties.Resources.Browse_30_gry; // Set PlayBlue Image
+        Bitmap BrowseOrgImg = Properties.Resources.Browse_30_Org; // Set PlayBlue Image
+        Bitmap BrowsewhiteImg = Properties.Resources.Browse_30_white_; // Set PlayBlue Image
+
+        Bitmap ClearOrgImg = Properties.Resources.Clear_30_Org; // Set PlayBlue Image
+        Bitmap ClearWhiteImg = Properties.Resources.Clear_30_White; // Set PlayBlue Image
+
+        Bitmap MergeOrg30 = Properties.Resources.merge_orange__30_; // Set PlayBlue Image
+        Bitmap MeargWhite30 = Properties.Resources.merge_white__30; // Set PlayBlue Image
+
+        Bitmap SpinnerOrgGif = Properties.Resources.Spinner_30_Org; // Set PlayBlue Image
+        Bitmap VerifiredOrgGif = Properties.Resources.Verifired_30_Org; // Set PlayBlue Image
 
         string db_Server;
         string db_Name;
@@ -300,6 +313,7 @@ namespace ImageScroller
                     MessageBox.Show(" New " + cp_Name + " Project Created");
 
                     lab_SelectProjectName.Text = cp_Name.ToString();
+                    lab_ProjectName.Text = cp_Name.ToString();
                 }
             }
             else
@@ -312,11 +326,11 @@ namespace ImageScroller
         // Text search
         private void Search_TxtBox()
         {
-            if (txt_Newproject.Text != "")
+            if (txt_Search.Text != "")
             {
                 foreach (ListViewItem item in listView_ProjectName.Items)
                 {
-                    if (item.Text.ToLower().Contains(txt_Newproject.Text.ToLower()))
+                    if (item.Text.ToLower().Contains(txt_Search.Text.ToLower()))
                     {
                         item.Selected = true;
                     }
@@ -329,7 +343,7 @@ namespace ImageScroller
                 if (listView_ProjectName.SelectedItems.Count == 1)
                 {
                     listView_ProjectName.Focus();
-                    txt_Newproject.Focus();
+                    txt_Search.Focus();
                 }
             }
             else
@@ -371,7 +385,7 @@ namespace ImageScroller
 
             pictureBoxArry[i].BackColor = Color.Transparent;
             pictureBoxArry[i].Visible = true;
-            pictureBoxArry[i].Image = LoadSImg;
+            pictureBoxArry[i].Image = SpinnerOrgGif;
             this.Cursor = Cursors.WaitCursor;
         }
         private void Get_CheckPictureBoxCheck(int i)
@@ -391,7 +405,7 @@ namespace ImageScroller
 
             pictureBoxArry[i].BackColor = Color.Transparent;
             pictureBoxArry[i].Visible = true;
-            pictureBoxArry[i].Image = CheckImg;
+            pictureBoxArry[i].Image = VerifiredOrgGif;
             this.Cursor = Cursors.WaitCursor;
         }
 
@@ -425,7 +439,7 @@ namespace ImageScroller
         // Save Channel, VideoPath, SnapshortPath
         private void Save_Channel_Path()
         {
-           
+
             CheckBox[] CheckBoxArray = new CheckBox[9];
             TextBox[] TextBoxArry = new TextBox[9];
             string[] ChannelNameArray = new string[9];
@@ -501,7 +515,7 @@ namespace ImageScroller
                     {
                         db_connection();
                         MySqlCommand cmd = new MySqlCommand();
-                        cmd.CommandText = "UPDATE channel_detail SET Channel_name=@Channel_name, path_Video=@path_Video,path_SnapShot=@path_SnapShot,Project_ID=@Project_ID," +
+                        cmd.CommandText = "UPDATE Channel_detail SET Channel_name=@Channel_name, path_Video=@path_Video,path_SnapShot=@path_SnapShot,Project_ID=@Project_ID," +
                             "img_Format=@img_Format,file_Type=@file_Type,file_VideoName=@file_VideoName WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
 
                         cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
@@ -521,7 +535,7 @@ namespace ImageScroller
                     {
                         db_connection();
                         MySqlCommand cmd = new MySqlCommand();
-                        cmd.CommandText = "INSERT INTO channel_detail(Channel_name, path_Video,path_SnapShot,Project_ID,img_Format,file_Type,file_VideoName) " +
+                        cmd.CommandText = "INSERT INTO Channel_detail(Channel_name, path_Video,path_SnapShot,Project_ID,img_Format,file_Type,file_VideoName) " +
                             "values(@Channel_name,@path_Video,@path_SnapShot,@Project_ID,@img_Format,@file_Type,@file_VideoName)";
 
                         cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
@@ -581,7 +595,7 @@ namespace ImageScroller
                     });
                 }
                 this.Cursor = Cursors.Default;
-               
+
             }
         }
 
@@ -672,7 +686,7 @@ namespace ImageScroller
                     }
                     try
                     {
-                       
+
                         //// FFmpeg Direct Run   ------------------ 
                         var startInfo = new ProcessStartInfo();
                         startInfo.WorkingDirectory = vfolder_path;
@@ -680,7 +694,7 @@ namespace ImageScroller
                         startInfo.CreateNoWindow = true;
                         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         Process process = Process.Start(startInfo);
-                        PB_VideoMerge.Image = LoadSImg;
+                        PB_VideoMerge.Image = SpinnerOrgGif;
                         process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                         //for (int i = 0; ; i++)
                         //{
@@ -718,9 +732,87 @@ namespace ImageScroller
                 //SetLoading(false);
             });
 
-                                  
+
         }
 
+        // Import Excel All Db data
+        private void Create_Excel()
+        {
+            DataTable dataTable = new DataTable { TableName = "MyTableName" };
+            try
+            {
+                string Path_CSVFile;
+                string Save_CSVFile;
+
+                db_connection();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandText = "SELECT CD.Project_ID, PD.Project_name AS Project_Name, PD.Project_Type, PD.date_time AS Project_Create_Date, " +
+                                  "CD.file_VideoName AS Video_Name, CD.path_Video AS Select_Video_Path, CD.path_Snapshot As SnapShot_Path, " +
+                                  "CD.date_time AS Video_Upload_Date FROM channel_detail CD INNER JOIN project_detail PD ON PD.Project_id = CD.Project_ID " +
+                                  "WHERE CD.Project_ID = '" + cp_ID + "'";
+
+                cmd.Connection = connect;
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(dataTable);
+
+                BindingSource bSource = new BindingSource();
+                bSource.DataSource = dataTable;
+
+                StringBuilder sb = new StringBuilder();
+
+                IEnumerable<string> columnNames = dataTable.Columns.Cast<DataColumn>().Select(column => column.ColumnName);
+                sb.AppendLine(string.Join(",", columnNames));
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
+                    sb.AppendLine(string.Join(",", fields));
+                }
+
+                Path_CSVFile = (dataTable.Rows[0][5]).ToString();  //Path_VideoTag
+                string FileCSVName = "AuditChannel - " + cp_ID + " - " + cp_Name + ".csv";
+                Save_CSVFile = Path_CSVFile + "\\" + cp_ID + "-" + cp_Name + "\\" + FileCSVName;
+                File.WriteAllText(Save_CSVFile, sb.ToString());
+
+                MessageBox.Show("Export Data Successfully");
+                connect.Close();
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        // Load the Channel Set
+        private void Channel_Check(object sender, EventArgs e) // Color Change
+        {
+            CheckBox[] CheckBoxArray = new CheckBox[9];
+            // check Box array
+            CheckBoxArray[0] = channel1_chk;
+            CheckBoxArray[1] = channel2_chk;
+            CheckBoxArray[2] = channel3_chk;
+            CheckBoxArray[3] = channel4_chk;
+            CheckBoxArray[4] = channel5_chk;
+            CheckBoxArray[5] = channel6_chk;
+            CheckBoxArray[6] = channel7_chk;
+            CheckBoxArray[7] = channel8_chk;
+            CheckBoxArray[8] = channel9_chk;
+
+            for (int i = 0; i < 9; i++)
+            {
+                if (CheckBoxArray[i].Checked == true)
+                {
+                    CheckBoxArray[i].ForeColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                }
+                else
+                {
+                    CheckBoxArray[i].ForeColor = System.Drawing.Color.Black;
+                }
+            }
+        }
 
         #region List View
         // Project Name In list View
@@ -746,9 +838,10 @@ namespace ImageScroller
             connect.Close();
         }
 
-        private void listView_ProjectName_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void listView_ProjectName_SelectedIndexChanged(object sender, EventArgs e)
         {
             Unload_Channeltext();
+
             if (listView_ProjectName.SelectedIndices.Count <= 0)
             {
                 return;
@@ -759,6 +852,8 @@ namespace ImageScroller
                 cp_Name = listView_ProjectName.Items[intselectedindex].Text;
                 //string text = listView_ProjectName.SelectedItems[0].Text;
                 lab_SelectProjectName.Text = cp_Name; // get curr project name
+                lab_ProjectName.Text = cp_Name;
+                //listView_ProjectName.ForeColor =  System.Drawing.ColorTranslator.FromHtml("#f26222");
             }
             Get_dbProjectID_Display();
             Get_dbChannel();
@@ -772,10 +867,41 @@ namespace ImageScroller
             listView_VideoFile.Columns.Add("Select Video Name", 500);
         }
 
-        private void listView_VideoFile_SelectedIndexChanged(object sender, EventArgs e)
+        // Delete ListView Iteams
+        private void listView_ProjectName_MouseClick_1(object sender, MouseEventArgs e)
         {
-
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                foreach (ListViewItem eachItem in listView_ProjectName.SelectedItems)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to Delete Project " + eachItem.Text + " Yes/No", "Remove", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        listView_ProjectName.Items.Remove(eachItem);
+                        string SelectProject_Name = eachItem.Text;
+                        Delete_Project(SelectProject_Name);
+                    }
+                }
+            }
         }
+
+        private void listView_VideoFile_MouseClick_1(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                foreach (ListViewItem eachItem in listView_VideoFile.SelectedItems)
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to remove Yes/No", "Remove", MessageBoxButtons.YesNo);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        listView_VideoFile.Items.Remove(eachItem);
+                    }
+                }
+            }
+        }
+
+
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -834,6 +960,7 @@ namespace ImageScroller
             channel9_chk.Checked = false;
             txt_Newproject.Text = "";
             lab_SelectProjectName.Text = "";
+            lab_ProjectName.Text = "";
             lab_ProjectID.Text = "";
             lab_ProjectType.Text = "";
             Unload_CheckPictureBox();
@@ -900,7 +1027,31 @@ namespace ImageScroller
         }
 
         // btn Add New Project
-        private void btn_Newproject_Click_1(object sender, EventArgs e)
+        private void btn_AddProject_Click(object sender, EventArgs e)
+        {
+            if (txt_Newproject.Text != "" && cmb_TagMaster.SelectedItem != null)
+            {
+                Unload_Channeltext();
+                Insert_NewProject();
+                Add_ListProjectName();
+                Get_dbProjectID_Display(); // Display Project ID in lab
+                txt_Newproject.Text = "";
+            }
+            else
+            {
+                if (txt_Newproject.Text == "")
+                {
+                    MessageBox.Show("Please Enter Project Name");
+                    txt_Newproject.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Please Select Project Type");
+                    cmb_TagMaster.Focus();
+                }
+            }
+        }
+        private void btn_Newproject_Click(object sender, EventArgs e)
         {
             if (txt_Newproject.Text != "" && cmb_TagMaster.SelectedItem != null)
             {
@@ -925,14 +1076,8 @@ namespace ImageScroller
             }
         }
 
-        // Delete Project 
-        private void listView_ProjectName_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        // Text search
-        private void txt_Newproject_TextChanged(object sender, EventArgs e)
+        // Text search      
+        private void txt_Search_TextChanged(object sender, EventArgs e)
         {
             Search_TxtBox();
         }
@@ -959,7 +1104,7 @@ namespace ImageScroller
         }
 
         // For the save the video path & convert into Snapshot
-        private void button2_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             if (lab_SelectProjectName.Text != "")
             {
@@ -1003,6 +1148,26 @@ namespace ImageScroller
             getFileFormatSample();
         }
 
+        //btn Video convert
+        private void btn_VideoConvert_Click(object sender, EventArgs e)
+        {
+            //Thread tid1 = new Thread(new ThreadStart(SetLoad));
+            //Thread tid2 = new Thread(new ThreadStart(Convert_VideoToVideo_FFmpeg));
+            //tid1.Start();
+            //tid2.Start();
+            //MessageBox.Show("Done");
+            try
+            {
+                Thread threadInput = new Thread(Convert_VideoToVideo_FFmpeg);
+                threadInput.Start();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            //Convert_VideoToVideo();    
+        }
         private void btn_ConVideo_Click(object sender, EventArgs e)
         {
             //Thread tid1 = new Thread(new ThreadStart(SetLoad));
@@ -1047,7 +1212,23 @@ namespace ImageScroller
             }
         }
 
-        // For The btn_VideoName
+        // btn video Browse Click
+        private void Browser_Video_Click(object sender, EventArgs e)
+        {
+            Add_ListVideoName();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            DialogResult dr = ofd.ShowDialog();
+            if (dr == System.Windows.Forms.DialogResult.OK)
+            {
+                foreach (String file in ofd.FileNames)
+                {
+                    vfile_path = file; // file path               
+                    ListViewItem lv = new ListViewItem(vfile_path);
+                    listView_VideoFile.Items.Add(lv);
+                }
+            }
+        }
         private void btn_BrowserVideo_Click(object sender, EventArgs e)
         {
             Add_ListVideoName();
@@ -1074,205 +1255,398 @@ namespace ImageScroller
             //}
         }
 
-        // Btn_Clear
+        // btn list view clear
+        private void Btn_ClearPB_Click(object sender, EventArgs e)
+        {
+            listView_VideoFile.Items.Clear();
+        }
         private void btn_Clear_Click(object sender, EventArgs e)
         {
             listView_VideoFile.Items.Clear();
         }
 
+        // btn Form Close
+        private void lab_Close_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        //btn Form Max
+        private void lab_Max_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else if (WindowState == FormWindowState.Maximized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        //btn Form Mini
+        private void lab_mini_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
         // For The btn_browser
-        private void btn_browser1_Click_1(object sender, EventArgs e)
+        private void Browse_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel1_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser2_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel2_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser3_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel3_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser4_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel4_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser5_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel5_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser6_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel6_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser7_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel7_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser8_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel8_txt.Text = vfile_path;
-            }
-        }
-        private void btn_browser9_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                vfile_path = ofd.FileName; // file path
-                channel9_txt.Text = vfile_path;
-            }
+            string Name_Btn = ((PictureBox)sender).Name;
 
-            //folderDlg.ShowNewFolderButton = true;
-            //DialogResult result = folderDlg.ShowDialog();
-            //if (result == DialogResult.OK)
-            //{
-            //    channel9_txt.Text = folderDlg.SelectedPath;
-            //    Environment.SpecialFolder root = folderDlg.RootFolder;
-            //}
-        }
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                switch (Name_Btn)
+                {
+                    case "Browse_PB1":
+                            vfile_path = ofd.FileName; // file path
+                            channel1_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB2":
+                        vfile_path = ofd.FileName; // file path
+                        channel2_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB3":
+                        vfile_path = ofd.FileName; // file path
+                        channel3_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB4":
+                        vfile_path = ofd.FileName; // file path
+                        channel4_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB5":
+                        vfile_path = ofd.FileName; // file path
+                        channel5_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB6":
+                        vfile_path = ofd.FileName; // file path
+                        channel6_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB7":
+                        vfile_path = ofd.FileName; // file path
+                        channel7_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB8":
+                        vfile_path = ofd.FileName; // file path
+                        channel8_txt.Text = vfile_path;
+                        break;
+                    case "Browse_PB9":
+                        vfile_path = ofd.FileName; // file path
+                        channel9_txt.Text = vfile_path;
+                        break;
+                    default:
+                        break;
+                        // Single for every btn
+                        //private void Browse_PB1_Click(object sender, EventArgs e)
+                        //{
+                        //    OpenFileDialog ofd = new OpenFileDialog();
+                        //    if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        //    {
+                        //        vfile_path = ofd.FileName; // file path
+                        //        channel1_txt.Text = vfile_path;
+                        //    }
+                        //}   
+                }
+            }
+        }        
 
+       
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-        private void listView_ProjectName_MouseClick(object sender, MouseEventArgs e)
+
+        #region Mouse Enter/Leave/Move
+        // Mouse Enter in picturebox 
+        private void Browse_MouseEnter(object sender, EventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            string LableText = ((PictureBox)sender).Name;
+            switch (LableText)
             {
-                foreach (ListViewItem eachItem in listView_ProjectName.SelectedItems)
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to Delete Project " + eachItem.Text + " Yes/No", "Remove", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        listView_ProjectName.Items.Remove(eachItem);
-                        string SelectProject_Name = eachItem.Text;
-                        Delete_Project(SelectProject_Name);
-                    }
-                }
+                case "Browse_PB1":
+                    Browse_PB1.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB2":
+                    Browse_PB2.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB3":
+                    Browse_PB3.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB4":
+                    Browse_PB4.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB5":
+                    Browse_PB5.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB6":
+                    Browse_PB6.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB7":
+                    Browse_PB7.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB8":
+                    Browse_PB8.Image = BrowseOrgImg;
+                    break;
+                case "Browse_PB9":
+                    Browse_PB9.Image = BrowseOrgImg;
+                    break;
+                case "Browser_Video":
+                    Browser_Video.Image = BrowseOrgImg;
+                    break;
+                case "Btn_ClearPB":
+                    Btn_ClearPB.Image = ClearOrgImg;
+                    break;
+                case "btn_VideoConvert":
+                    btn_VideoConvert.Image = MergeOrg30;
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void listView_VideoFile_MouseClick(object sender, MouseEventArgs e)
+        // Mouse Leave in picturebox 
+        private void Browse_MouseLeave(object sender, EventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            string LableText = ((PictureBox)sender).Name;
+            //string LableText = this.Name;
+            switch (LableText)
             {
-                foreach (ListViewItem eachItem in listView_VideoFile.SelectedItems)
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to remove Yes/No", "Remove", MessageBoxButtons.YesNo);
+                case "Browse_PB1":
+                    Browse_PB1.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB2":
+                    Browse_PB2.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB3":
+                    Browse_PB3.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB4":
+                    Browse_PB4.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB5":
+                    Browse_PB5.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB6":
+                    Browse_PB6.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB7":
+                    Browse_PB7.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB8":
+                    Browse_PB8.Image = BrowseGryImg;
+                    break;
+                case "Browse_PB9":
+                    Browse_PB9.Image = BrowseGryImg;
+                    break;
+                case "Browser_Video":
+                    Browser_Video.Image = BrowsewhiteImg;
+                    break;
+                case "Btn_ClearPB":
+                    Btn_ClearPB.Image = ClearWhiteImg;
+                    break;
+                case "btn_VideoConvert":
+                    btn_VideoConvert.Image = MeargWhite30;
+                    break;
+                default:
+                    break;
+            }
 
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        listView_VideoFile.Items.Remove(eachItem);
-                    }
-                }
+            mv_Channel.Text = "";
+            mv_SelectVideo.Text = "";
+        }
+
+        // Case Mouse Hover -- move for PictueBox
+        private void Browse_PB1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //String Location_Mouse = " X-Coordinate : " + e.X + "  Y -Coordinate : " + e.Y;
+            //X_Mouse = e.X;
+            //Y_Mouse = e.Y;
+            //var screenPosition = this.PointToScreen(Browse_PB1.Location);
+            //this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition.X, Y_Mouse + 10 + screenPosition.Y);
+            //mv_Channel.Text = "Add New Project";
+
+            String Location_Mouse = " X-Coordinate : " + e.X + "  Y -Coordinate : " + e.Y;
+            X_Mouse = e.X;
+            Y_Mouse = e.Y;
+            string LableText = ((PictureBox)sender).Name;
+            switch (LableText)
+            {
+                case "Browse_PB1":
+                    Browse_PB1.Image = BrowseOrgImg;
+                    var screenPosition = this.PointToScreen(Browse_PB1.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition.X, Y_Mouse + 10 + screenPosition.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB2":
+                    Browse_PB2.Image = BrowseOrgImg;
+                    var screenPosition2 = this.PointToScreen(Browse_PB2.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition2.X, Y_Mouse + 10 + screenPosition2.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB3":
+                    Browse_PB3.Image = BrowseOrgImg;
+                    var screenPosition3 = this.PointToScreen(Browse_PB3.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition3.X, Y_Mouse + 10 + screenPosition3.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB4":
+                    Browse_PB4.Image = BrowseOrgImg;
+                    var screenPosition4 = this.PointToScreen(Browse_PB4.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition4.X, Y_Mouse + 10 + screenPosition4.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB5":
+                    Browse_PB5.Image = BrowseOrgImg;
+                    var screenPosition5 = this.PointToScreen(Browse_PB5.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition5.X, Y_Mouse + 10 + screenPosition5.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB6":
+                    Browse_PB6.Image = BrowseOrgImg;
+                    var screenPosition6 = this.PointToScreen(Browse_PB6.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition6.X, Y_Mouse + 10 + screenPosition6.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB7":
+                    Browse_PB7.Image = BrowseOrgImg;
+                    var screenPosition7 = this.PointToScreen(Browse_PB7.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition7.X, Y_Mouse + 10 + screenPosition7.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB8":
+                    Browse_PB8.Image = BrowseOrgImg;
+                    var screenPosition8 = this.PointToScreen(Browse_PB8.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition8.X, Y_Mouse + 10 + screenPosition8.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browse_PB9":
+                    Browse_PB9.Image = BrowseOrgImg;
+                    var screenPosition9 = this.PointToScreen(Browse_PB9.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + screenPosition9.X, Y_Mouse + 10 + screenPosition9.Y);
+                    mv_Channel.Text = "Browse Video";
+                    break;
+                case "Browser_Video":
+                    Browser_Video.Image = BrowseOrgImg;
+                    var XY = this.PointToScreen(Browser_Video.Location);
+                    this.mv_SelectVideo.Location = new Point(X_Mouse + 10 + XY.X, Y_Mouse + 10 + XY.Y);
+                    mv_SelectVideo.Text = "Browse Video";
+                    break;
+                case "Btn_ClearPB":
+                    Btn_ClearPB.Image = ClearOrgImg;
+                    var Btn_ClearPBXY = this.PointToScreen(Btn_ClearPB.Location);
+                    this.mv_SelectVideo.Location = new Point(X_Mouse + 10 + Btn_ClearPBXY.X, Y_Mouse + 10 + Btn_ClearPBXY.Y);
+                    mv_SelectVideo.Text = "Clear";
+                    break;
+                case "btn_VideoConvert":
+                    btn_VideoConvert.Image = MergeOrg30;
+                    var btn_VideoConvertXY = this.PointToScreen(btn_VideoConvert.Location);
+                    this.mv_SelectVideo.Location = new Point(X_Mouse + 10 + btn_VideoConvertXY.X, Y_Mouse + 10 + btn_VideoConvertXY.Y);
+                    mv_SelectVideo.Text = "Start Convert";
+                    break;
+                default:
+                    break;
             }
 
         }
 
-        // Import Excel All Db data
-        private void Create_Excel()
+        // Mouse Enter in Lable 
+        private void Lable_MouseEnter(object sender, EventArgs e)
         {
-            DataTable dataTable = new DataTable { TableName = "MyTableName" };
-            try
+            string LableText = ((Label)sender).Name;
+            //string LableText = this.Name;
+            switch (LableText)
             {
-                string Path_CSVFile;
-                string Save_CSVFile;
-
-                db_connection();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = "SELECT CD.Project_ID, PD.Project_name AS Project_Name, PD.Project_Type, PD.date_time AS Project_Create_Date, " +
-                                  "CD.file_VideoName AS Video_Name, CD.path_Video AS Select_Video_Path, CD.path_Snapshot As SnapShot_Path, " +
-                                  "CD.date_time AS Video_Upload_Date FROM channel_detail CD INNER JOIN project_detail PD ON PD.Project_id = CD.Project_ID " +
-                                  "WHERE CD.Project_ID = '" + cp_ID + "'";
-
-                cmd.Connection = connect;
-
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                da.Fill(dataTable);
-
-                BindingSource bSource = new BindingSource();
-                bSource.DataSource = dataTable;
-
-                StringBuilder sb = new StringBuilder();
-
-                IEnumerable<string> columnNames = dataTable.Columns.Cast<DataColumn>().Select(column => column.ColumnName);
-                sb.AppendLine(string.Join(",", columnNames));
-
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    IEnumerable<string> fields = row.ItemArray.Select(field => field.ToString());
-                    sb.AppendLine(string.Join(",", fields));
-                }
-
-                Path_CSVFile = (dataTable.Rows[0][5]).ToString();  //Path_VideoTag
-                string FileCSVName = "AuditChannel - " + cp_ID + " - " + cp_Name + ".csv";
-                Save_CSVFile = Path_CSVFile + "\\" + cp_ID + "-" + cp_Name + "\\" + FileCSVName;
-                File.WriteAllText(Save_CSVFile, sb.ToString());
-
-                MessageBox.Show("Export Data Successfully");
-                connect.Close();
-
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                case "btn_AddProject":
+                    btn_AddProject.ForeColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    btn_AddProject.BackColor = System.Drawing.Color.WhiteSmoke;
+                    break;
+                case "lab_Close":
+                    lab_Close.ForeColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    lab_Close.BackColor = System.Drawing.Color.WhiteSmoke;
+                    break;
+                case "lab_Max":
+                    lab_Max.ForeColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    lab_Max.BackColor = System.Drawing.Color.WhiteSmoke;
+                    break;
+                case "lab_mini":
+                    lab_mini.ForeColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    lab_mini.BackColor = System.Drawing.Color.WhiteSmoke;
+                    break;
+                default:
+                    break;
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Mouse Leave in Lable 
+        private void Lable_MouseLeave(object sender, EventArgs e)
         {
-            if (lab_ProjectID.Text != "" && lab_SelectProjectName.Text != "")
+            string LableText = ((Label)sender).Name;
+            //string LableText = this.Name;
+            switch (LableText)
             {
-                Create_Excel();
+                case "btn_AddProject":
+                    btn_AddProject.ForeColor = System.Drawing.Color.WhiteSmoke;
+                    btn_AddProject.BackColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    break;
+                case "lab_Close":
+                    lab_Close.ForeColor = System.Drawing.Color.WhiteSmoke;
+                    lab_Close.BackColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    break;
+                case "lab_Max":
+                    lab_Max.ForeColor = System.Drawing.Color.WhiteSmoke;
+                    lab_Max.BackColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    break;
+                case "lab_mini":
+                    lab_mini.ForeColor = System.Drawing.Color.WhiteSmoke;
+                    lab_mini.BackColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
+                    break;
+                default:
+                    break;
             }
-            else
+
+            mv_NewProject.Text = "";
+            mv_Header.Text = "";
+        }
+
+        // Case Mouse Hover -- move for Lable
+        private void btn_AddProject_MouseMove(object sender, MouseEventArgs e)
+        {
+            String Location_Mouse = " X-Coordinate : " + e.X + "  Y -Coordinate : " + e.Y;
+            X_Mouse = e.X;
+            Y_Mouse = e.Y;
+            string LableText = ((Label)sender).Name;
+            switch (LableText)
             {
-                MessageBox.Show("Select Any Project ....");
+                case "btn_AddProject":
+                    var screenPosition = this.PointToScreen(btn_AddProject.Location);
+                    this.mv_NewProject.Location = new Point(X_Mouse + 10 + screenPosition.X, Y_Mouse + 10 + screenPosition.Y);
+                    mv_NewProject.Text = "Add Project";
+                    break;
+                case "lab_mini":
+                    var screenPosition1 = this.PointToScreen(lab_mini.Location);
+                    this.mv_Header.Location = new Point(X_Mouse + 2 + screenPosition1.X, Y_Mouse + screenPosition1.Y);
+                    mv_Header.Text = "Minimize";
+                    break;
+                case "lab_Max":
+                    var screenPosition2 = this.PointToScreen(lab_Max.Location);
+                    this.mv_Header.Location = new Point(X_Mouse + 2 + screenPosition2.X, Y_Mouse + screenPosition2.Y);
+                    mv_Header.Text = "Maximize";
+                    break;
+                case "lab_Close":
+                    var screenPosition3 = this.PointToScreen(lab_Close.Location);
+                    this.mv_Header.Location = new Point(X_Mouse + 2 + screenPosition3.X, Y_Mouse + screenPosition3.Y);
+                    mv_Header.Text = "Close";
+                    break;
+                default:
+                    break;
             }
-        }     
-      
+        }
+        #endregion------------------------------------------------------------------------------------------------------------------
+
     }
 }
-    
+
+
 
 
 

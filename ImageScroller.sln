@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageScroller", "ImageScrol
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Acti Audit - MySetUp", "MySetUp - ActiAudit\MySetUp - ActiAudit.vdproj", "{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ActiAudit-v02", "ActiAudit-v02\ActiAudit-v02.vdproj", "{2FCCEB7D-2BAC-4360-8516-24894B4493A1}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ActiAudit_V_03", "ActiAudit_V_03\ActiAudit_V_03.vdproj", "{EC1F323A-8F64-4D09-955D-4523B2F98C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +21,8 @@ Global
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}.Debug|Any CPU.ActiveCfg = Debug
 		{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}.Release|Any CPU.ActiveCfg = Release
-		{2FCCEB7D-2BAC-4360-8516-24894B4493A1}.Debug|Any CPU.ActiveCfg = Debug
-		{2FCCEB7D-2BAC-4360-8516-24894B4493A1}.Release|Any CPU.ActiveCfg = Release
+		{EC1F323A-8F64-4D09-955D-4523B2F98C1F}.Debug|Any CPU.ActiveCfg = Debug
+		{EC1F323A-8F64-4D09-955D-4523B2F98C1F}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
