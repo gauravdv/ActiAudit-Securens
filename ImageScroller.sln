@@ -5,9 +5,13 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageScroller", "ImageScroller\ImageScroller.csproj", "{96B9AB62-8BF5-430C-8726-B77612E27541}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.1.1.", "MySetUp-v1.3.1.1.\MySetUp-v1.3.1.1..vdproj", "{96830DC3-D056-439C-93FA-38A89375A196}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.1.1", "MySetUp-ActiAudit-v1.3.1.1\MySetUp-ActiAudit-v1.3.1.1.vdproj", "{9BA2C308-361A-46CD-9CB4-E5B57127227B}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.1.1", "MySetUp-ActiAudit-v1.3.1.1\MySetUp-ActiAudit-v1.3.1.1.vdproj", "{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.1.1.", "MySetUp-v1.3.1.1\MySetUp-v1.3.1.1..vdproj", "{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.2.1.", "MySetUp-v1.3.2.1.\MySetUp-v1.3.2.1..vdproj", "{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.2.1", "MySetUp-ActiAudit-v1.3.2.1\MySetUp-ActiAudit-v1.3.2.1.vdproj", "{84CEC408-EDD7-4909-BFCB-53CE861D53B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +23,18 @@ Global
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Release|Any CPU.Build.0 = Release|Any CPU
-		{96830DC3-D056-439C-93FA-38A89375A196}.Debug|Any CPU.ActiveCfg = Debug
-		{96830DC3-D056-439C-93FA-38A89375A196}.Release|Any CPU.ActiveCfg = Release
-		{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}.Debug|Any CPU.ActiveCfg = Debug
-		{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}.Release|Any CPU.ActiveCfg = Release
+		{9BA2C308-361A-46CD-9CB4-E5B57127227B}.Debug|Any CPU.ActiveCfg = Debug
+		{9BA2C308-361A-46CD-9CB4-E5B57127227B}.Debug|Any CPU.Build.0 = Debug
+		{9BA2C308-361A-46CD-9CB4-E5B57127227B}.Release|Any CPU.ActiveCfg = Release
+		{9BA2C308-361A-46CD-9CB4-E5B57127227B}.Release|Any CPU.Build.0 = Release
+		{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}.Debug|Any CPU.ActiveCfg = Debug
+		{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}.Debug|Any CPU.Build.0 = Debug
+		{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}.Release|Any CPU.ActiveCfg = Release
+		{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}.Release|Any CPU.Build.0 = Release
+		{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}.Debug|Any CPU.ActiveCfg = Debug
+		{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}.Release|Any CPU.ActiveCfg = Release
+		{84CEC408-EDD7-4909-BFCB-53CE861D53B6}.Debug|Any CPU.ActiveCfg = Debug
+		{84CEC408-EDD7-4909-BFCB-53CE861D53B6}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

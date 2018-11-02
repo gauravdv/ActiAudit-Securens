@@ -13,11 +13,19 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Threading;
 using System.Net;
+using System.Net.Sockets;
+using System.Reflection;
 
 namespace ImageScroller
 {
     public partial class frm_SaveChannel : Form
     {
+        cls_dbConnection cls_dbConnection = new cls_dbConnection();
+        cls_CompIp cls_CompIp = new cls_CompIp(); // class file declare for using function
+
+        int ABC;
+        //int DownloadPer = 0;
+        string Btn_name;
         int X_Mouse;
         int Y_Mouse;
 
@@ -36,11 +44,13 @@ namespace ImageScroller
         Bitmap SpinnerOrgGif = Properties.Resources.Spinner_30_Org; // Set PlayBlue Image
         Bitmap VerifiredOrgGif = Properties.Resources.Verifired_30_Org; // Set PlayBlue Image
 
+        Bitmap DownloadGryImg = Properties.Resources.Download_30_Gry; // Set PlayBlue Image
+        Bitmap DownloadOrgImg = Properties.Resources.Download_30_Org; // Set PlayBlue Image
+
         string db_Server;
         string db_Name;
         string db_UserID;
-        string db_Password;
-        public static string myIP;
+        string db_Password;      
 
         public static string cp_ID; // Curr Project ID
         public static string cp_Name; // curr Project Name
@@ -76,9 +86,8 @@ namespace ImageScroller
         public frm_SaveChannel()
         {
             InitializeComponent();
-            initChannelDisplayForm();
-            Get_ipAddress();
-
+            WindowState = FormWindowState.Maximized;
+            initChannelDisplayForm();           
         }
 
 
@@ -139,6 +148,7 @@ namespace ImageScroller
         // Get ProjectID Name to Db
         private void Get_dbProjectID(out string db_ProjectID, ref string db_ProjectName)
         {
+            cls_CompIp.Get_ipAddress(out string myIP); // Computer Ip adddress
             db_connection();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "SELECT Project_ID,Project_Type FROM project_detail WHERE Project_name = '" + lab_SelectProjectName.Text + "' AND computer_IP = '" + myIP + "' ";
@@ -158,6 +168,7 @@ namespace ImageScroller
         // Get ProjectID To Display in lab_ProjectID
         private void Get_dbProjectID_Display() // for the add project id
         {
+            cls_CompIp.Get_ipAddress(out string myIP); // Computer Ip adddress
             string Pro_ID = cp_Name;
             db_connection();
             MySqlCommand cmd = new MySqlCommand();
@@ -252,37 +263,14 @@ namespace ImageScroller
             }
 
         }
-
-        // Delete Project 
-        private void Delete_Project(string SelectProject_Name)
-        {
-            db_connection();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "DELETE FROM project_detail WHERE Project_name = '" + SelectProject_Name + "' ";
-            cmd.Connection = connect;
-            MySqlDataReader cChannelReder = cmd.ExecuteReader();
-            cChannelReder.Close();
-            connect.Close();
-
-        }
+                
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        // Get the IP from the host name
-        private void Get_ipAddress()
-        {
-            string myHost = System.Net.Dns.GetHostName();// Get the hostname           
-            myIP = System.Net.Dns.GetHostByName(myHost).AddressList[0].ToString();  // Get the IP from the host name
-            if (myIP == "")
-            {
-                MessageBox.Show("IP Address Not Found");
-            }
-            //MessageBox.Show(myIP, myHost);
-        }
-
+        
         // Create a New Project
         private void Insert_NewProject()
         {
             // Check Project Name Exist or not
+            cls_CompIp.Get_ipAddress(out string myIP); // Computer Ip adddress
             int Scroll_Index = 0;
             cp_Name = txt_Newproject.Text;
             db_connection();
@@ -300,18 +288,10 @@ namespace ImageScroller
                 if (cp_Name != "")// project name not blank
                 {
                     // Insert Into db Project_detail
-                    db_connection();
-                    //MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = "INSERT INTO project_detail(Project_name,computer_IP,Project_Type, Scroll_Index) values(@Project_name,@computer_IP,@Project_Type, @Scroll_Index)";
-                    cmd.Parameters.AddWithValue("@Project_name", cp_Name);
-                    cmd.Parameters.AddWithValue("@computer_IP", myIP);
-                    cmd.Parameters.AddWithValue("@Project_Type", cmb_TagMaster.SelectedItem.ToString());
-                    cmd.Parameters.AddWithValue("@Scroll_Index", Scroll_Index);
-                    cmd.Connection = connect;
-                    MySqlDataReader ChannelReder = cmd.ExecuteReader();
-                    connect.Close();
+                    string ProjectType = cmb_TagMaster.SelectedItem.ToString();
+                    cls_dbConnection.Insert_ProjectName(cp_Name, myIP, ProjectType, Scroll_Index);  
+                    
                     MessageBox.Show(" New " + cp_Name + " Project Created");
-
                     lab_SelectProjectName.Text = cp_Name.ToString();
                     lab_ProjectName.Text = cp_Name.ToString();
                 }
@@ -355,17 +335,24 @@ namespace ImageScroller
         // Gat Tag Type
         private void Get_CmbTagType()
         {
-            db_connection();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT TagType_name FROM tag_type ORDER BY TagType_name ASC";
-            cmd.Connection = connect;
-            MySqlDataReader ChannelReder = cmd.ExecuteReader();
-            while (ChannelReder.Read())
+            List<string> list_TagType = new List<string>();
+            cls_dbConnection.Get_CmbTagType(ref list_TagType); // cmb Tag Reason          
+            for (int i = 0; i < list_TagType.Count; i++)
             {
-                cmb_TagMaster.Items.Add(ChannelReder["TagType_name"].ToString());
+                cmb_TagMaster.Items.Add(list_TagType[i]);
             }
-            ChannelReder.Close();
-            connect.Close();
+
+            //db_connection();
+            //MySqlCommand cmd = new MySqlCommand();
+            //cmd.CommandText = "SELECT TagType_name FROM tag_type ORDER BY TagType_name ASC";
+            //cmd.Connection = connect;
+            //MySqlDataReader ChannelReder = cmd.ExecuteReader();
+            //while (ChannelReder.Read())
+            //{
+            //    cmb_TagMaster.Items.Add(ChannelReder["TagType_name"].ToString());
+            //}
+            //ChannelReder.Close();
+            //connect.Close();
         }
 
         private void Get_CheckPictureBoxLoad(int i)
@@ -515,7 +502,7 @@ namespace ImageScroller
                     {
                         db_connection();
                         MySqlCommand cmd = new MySqlCommand();
-                        cmd.CommandText = "UPDATE Channel_detail SET Channel_name=@Channel_name, path_Video=@path_Video,path_SnapShot=@path_SnapShot,Project_ID=@Project_ID," +
+                        cmd.CommandText = "UPDATE channel_detail SET Channel_name=@Channel_name, path_Video=@path_Video,path_SnapShot=@path_SnapShot,Project_ID=@Project_ID," +
                             "img_Format=@img_Format,file_Type=@file_Type,file_VideoName=@file_VideoName WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
 
                         cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
@@ -535,7 +522,7 @@ namespace ImageScroller
                     {
                         db_connection();
                         MySqlCommand cmd = new MySqlCommand();
-                        cmd.CommandText = "INSERT INTO Channel_detail(Channel_name, path_Video,path_SnapShot,Project_ID,img_Format,file_Type,file_VideoName) " +
+                        cmd.CommandText = "INSERT INTO channel_detail(Channel_name, path_Video,path_SnapShot,Project_ID,img_Format,file_Type,file_VideoName) " +
                             "values(@Channel_name,@path_Video,@path_SnapShot,@Project_ID,@img_Format,@file_Type,@file_VideoName)";
 
                         cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
@@ -593,6 +580,22 @@ namespace ImageScroller
                     {
                         Get_CheckPictureBoxCheck(i);
                     });
+
+                    if (Directory.Exists(cSnapshotFolder_path_2))
+                    {
+                        int fileCount = Directory.GetFiles(cSnapshotFolder_path_2).Length;
+                        
+                        db_connection();
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.CommandText = "UPDATE channel_detail SET cd_ImageCount=@fileCount WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
+                        cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
+                        cmd.Parameters.AddWithValue("@fileCount", fileCount);
+                        cmd.Parameters.AddWithValue("@Project_ID", cp_ID);                     
+                        cmd.Connection = connect;
+                        MySqlDataReader Channel = cmd.ExecuteReader();
+                        connect.Close();
+                    }
+
                 }
                 this.Cursor = Cursors.Default;
 
@@ -818,24 +821,32 @@ namespace ImageScroller
         // Project Name In list View
         private void Add_ListProjectName()
         {
+            //cls_CompIp.Get_ipAddress(out string myIP); // Computer Ip adddress
+
             listView_ProjectName.GridLines = true;
             listView_ProjectName.View = View.Details;
             listView_ProjectName.Columns.Add("Project Name", 500);
-
-            db_connection();
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "SELECT Project_name FROM project_detail WHERE computer_IP = '" + myIP + "' ORDER BY Project_name ASC";
-            cmd.Connection = connect;
-            MySqlDataReader ChannelReder = cmd.ExecuteReader();
-
             listView_ProjectName.Items.Clear();
-            while (ChannelReder.Read())
+
+            List<string> list_ProjectName = new List<string>();
+            cls_dbConnection.Get_lvProjectName(ref list_ProjectName); // Select    
+            for (int i = 0; i < list_ProjectName.Count; i++)
             {
-                ListViewItem lv = new ListViewItem(ChannelReder["Project_name"].ToString());
-                listView_ProjectName.Items.Add(lv);
+                listView_ProjectName.Items.Add(list_ProjectName[i]);
             }
-            ChannelReder.Close();
-            connect.Close();
+            //db_connection();
+            //MySqlCommand cmd = new MySqlCommand();
+            //cmd.CommandText = "SELECT Project_name FROM project_detail WHERE computer_IP = '" + myIP + "' ORDER BY Project_name ASC";
+            //cmd.Connection = connect;
+            //MySqlDataReader ChannelReder = cmd.ExecuteReader();
+
+            //while (ChannelReder.Read())
+            //{
+            //    ListViewItem lv = new ListViewItem(ChannelReder["Project_name"].ToString());
+            //    listView_ProjectName.Items.Add(lv);
+            //}
+            //ChannelReder.Close();
+            //connect.Close();
         }
 
         private void listView_ProjectName_SelectedIndexChanged(object sender, EventArgs e)
@@ -879,7 +890,7 @@ namespace ImageScroller
                     {
                         listView_ProjectName.Items.Remove(eachItem);
                         string SelectProject_Name = eachItem.Text;
-                        Delete_Project(SelectProject_Name);
+                        cls_dbConnection.Delete_Project(SelectProject_Name);
                     }
                 }
             }
@@ -1018,8 +1029,7 @@ namespace ImageScroller
         #region Load, Click
         // Form Load
         private void frm_SaveChannel_Load(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Maximized;
+        {            
             Add_ListProjectName();
             Get_CmbTagType();
             //button1.Hide();
@@ -1106,7 +1116,9 @@ namespace ImageScroller
         // For the save the video path & convert into Snapshot
         private void button2_Click(object sender, EventArgs e)
         {
-            if (lab_SelectProjectName.Text != "")
+            if (lab_ProjectName.Text == "Project Name")
+            { MessageBox.Show("Please Select Project First"); }
+            else
             {
                 try
                 {
@@ -1117,12 +1129,13 @@ namespace ImageScroller
                 {
                     MessageBox.Show(ex.Message);
                 }
-
             }
-            else
-            {
-                MessageBox.Show("Please Select Any Project");
-            }
+            //if (lab_SelectProjectName.Text != "")
+            //{             
+            //}
+            //else
+            //{
+            //}
         }
         private void Click_StartAuditing()
         {
@@ -1350,9 +1363,102 @@ namespace ImageScroller
                         //}   
                 }
             }
-        }        
+        }
+        
+        // For The btn_Download video from CVR
+        private void Download_Click(object sender, EventArgs e)
+        {
+            if (lab_ProjectName.Text == "Project Name")
+            { MessageBox.Show("Please Select Project First");}
+            else
+            {
+                Btn_name = ((PictureBox)sender).Name;
+                frm_DownloadCVR CVR_Download = new frm_DownloadCVR(this);
+                CVR_Download.Show();
+            }
+        }
 
-       
+        // video download path 
+        // function call from download form
+        public void get_Path(string Download_Path)
+        {
+            // Text bo0x array           
+            TextBox[] TextBoxArry = new TextBox[9];
+            TextBoxArry[0] = channel1_txt;
+            TextBoxArry[1] = channel2_txt;
+            TextBoxArry[2] = channel3_txt;
+            TextBoxArry[3] = channel4_txt;
+            TextBoxArry[4] = channel5_txt;
+            TextBoxArry[5] = channel6_txt;
+            TextBoxArry[6] = channel7_txt;
+            TextBoxArry[7] = channel8_txt;
+            TextBoxArry[8] = channel9_txt;
+
+            // Download btn bo0x array  
+            PictureBox[] pictureBoxArry = new PictureBox[9];
+            pictureBoxArry[0] = PB1_Download;
+            pictureBoxArry[1] = PB2_Download;
+            pictureBoxArry[2] = PB3_Download;
+            pictureBoxArry[3] = PB4_Download;
+            pictureBoxArry[4] = PB5_Download;
+            pictureBoxArry[5] = PB6_Download;
+            pictureBoxArry[6] = PB7_Download;
+            pictureBoxArry[7] = PB8_Download;
+            pictureBoxArry[8] = PB9_Download;
+
+            for (int i = 0; i < 9; i++)
+            {
+                // Insert Channel To db
+                if (pictureBoxArry[i].Name == Btn_name)
+                {
+                    string path = Download_Path;
+                    SetControlPropertyThreadSafe(TextBoxArry[i], "Text", path);
+                   // TextBoxArry[i].Text = path;
+                }
+            }
+        }
+
+        private delegate void SetControlPropertyThreadSafeDelegate(Control control, string propertyName, object propertyValue);
+        public static void SetControlPropertyThreadSafe(Control control, string propertyName, object propertyValue)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new SetControlPropertyThreadSafeDelegate
+                (SetControlPropertyThreadSafe),
+                new object[] { control, propertyName, propertyValue });
+            }
+            else
+            {
+                control.GetType().InvokeMember(
+                    propertyName,
+                    BindingFlags.SetProperty,
+                    null,
+                    control,
+                    new object[] { propertyValue });
+            }
+        }
+
+        public void get_Percentage(int DownloadPer)
+        {
+            ABC = DownloadPer;
+            Thread th = new Thread(loading);
+            th.Start();
+          
+            //lab_per1.Text = DownloadPer.ToString();
+            //progressBar1.Value = DownloadPer;
+            //Int32.TryParse(_Percentage, out DownloadPer);
+            //Thread th = new Thread(loading);
+            //th.Start();
+            ////progressBar1.Value = x;
+        }
+
+        public void loading()
+        {
+            //rtxt_Per1.Text = "";
+            //rtxt_Per1.Text = ABC.ToString();
+
+            // progressBar1.Value = DownloadPer;
+        }
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -1398,6 +1504,33 @@ namespace ImageScroller
                     break;
                 case "btn_VideoConvert":
                     btn_VideoConvert.Image = MergeOrg30;
+                    break;
+                case "PB1_Download":
+                    PB1_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB2_Download":
+                    PB2_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB3_Download":
+                    PB3_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB4_Download":
+                    PB4_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB5_Download":
+                    PB5_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB6_Download":
+                    PB6_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB7_Download":
+                    PB7_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB8_Download":
+                    PB8_Download.Image = DownloadOrgImg;
+                    break;
+                case "PB9_Download":
+                    PB9_Download.Image = DownloadOrgImg;
                     break;
                 default:
                     break;
@@ -1446,6 +1579,33 @@ namespace ImageScroller
                     break;
                 case "btn_VideoConvert":
                     btn_VideoConvert.Image = MeargWhite30;
+                    break;
+                case "PB1_Download":
+                    PB1_Download.Image = DownloadGryImg;
+                        break;
+                case "PB2_Download":
+                    PB2_Download.Image = DownloadGryImg;
+                    break;
+                case "PB3_Download":
+                    PB3_Download.Image = DownloadGryImg;
+                    break;
+                case "PB4_Download":
+                    PB4_Download.Image = DownloadGryImg;
+                    break;
+                case "PB5_Download":
+                    PB5_Download.Image = DownloadGryImg;
+                    break;
+                case "PB6_Download":
+                    PB6_Download.Image = DownloadGryImg;
+                    break;
+                case "PB7_Download":
+                    PB7_Download.Image = DownloadGryImg;
+                    break;
+                case "PB8_Download":
+                    PB8_Download.Image = DownloadGryImg;
+                    break;
+                case "PB9_Download":
+                    PB9_Download.Image = DownloadGryImg;
                     break;
                 default:
                     break;
@@ -1543,6 +1703,60 @@ namespace ImageScroller
                     this.mv_SelectVideo.Location = new Point(X_Mouse + 10 + btn_VideoConvertXY.X, Y_Mouse + 10 + btn_VideoConvertXY.Y);
                     mv_SelectVideo.Text = "Start Convert";
                     break;
+                case "PB1_Download":
+                    PB1_Download.Image = DownloadOrgImg;
+                    var PB1_Download1 = this.PointToScreen(PB1_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB1_Download1.X, Y_Mouse + 10 + PB1_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB2_Download":
+                    PB2_Download.Image = DownloadOrgImg;
+                    var PB2_Download1 = this.PointToScreen(PB2_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB2_Download1.X, Y_Mouse + 10 + PB2_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB3_Download":
+                    PB3_Download.Image = DownloadOrgImg;
+                    var PB3_Download1 = this.PointToScreen(PB3_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB3_Download1.X, Y_Mouse + 10 + PB3_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;               
+                case "PB4_Download":
+                    PB4_Download.Image = DownloadOrgImg;
+                    var PB4_Download1 = this.PointToScreen(PB4_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB4_Download1.X, Y_Mouse + 10 + PB4_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB5_Download":
+                    PB5_Download.Image = DownloadOrgImg;
+                    var PB5_Download1 = this.PointToScreen(PB5_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB5_Download1.X, Y_Mouse + 10 + PB5_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB6_Download":
+                    PB6_Download.Image = DownloadOrgImg;
+                    var PB6_Download1 = this.PointToScreen(PB6_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB6_Download1.X, Y_Mouse + 10 + PB6_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB7_Download":
+                    PB7_Download.Image = DownloadOrgImg;
+                    var PB7_Download1 = this.PointToScreen(PB7_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB7_Download1.X, Y_Mouse + 10 + PB7_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB8_Download":
+                    PB8_Download.Image = DownloadOrgImg;
+                    var PB8_Download1 = this.PointToScreen(PB8_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB8_Download1.X, Y_Mouse + 10 + PB8_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;
+                case "PB9_Download":
+                    PB9_Download.Image = DownloadOrgImg;
+                    var PB9_Download1 = this.PointToScreen(PB9_Download.Location);
+                    this.mv_Channel.Location = new Point(X_Mouse + 10 + PB9_Download1.X, Y_Mouse + 10 + PB9_Download1.Y);
+                    mv_Channel.Text = "Download CVR";
+                    break;              
                 default:
                     break;
             }
@@ -1642,7 +1856,9 @@ namespace ImageScroller
             }
         }
         #endregion------------------------------------------------------------------------------------------------------------------
-
+          
+              
+        
     }
 }
 

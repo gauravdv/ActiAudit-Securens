@@ -1,7 +1,0 @@
-1. Changes All UI 
-2. SnapShort Save ctr+S 
-
-
-DataBase :
-	Table  : project_detail
-			Add : 	Scroll_Index	int(11)			Yes	NULL

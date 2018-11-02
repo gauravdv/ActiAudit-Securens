@@ -1,6 +1,0 @@
-when we can work on space then we can used...
-
-Create a workSpace Folder in c:\ bcz of online conectivity
-and put the full project on it
-open -> view -> Team Explorer -> green color
-	-> add account 

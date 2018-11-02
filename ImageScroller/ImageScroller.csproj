@@ -61,7 +61,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChannelInfo.cs" />
+    <Compile Include="cls_CompIp.cs" />
+    <Compile Include="cls_dbConnection.cs" />
     <Compile Include="FileOperation.cs" />
+    <Compile Include="frm_DownloadCVR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_DownloadCVR.Designer.cs">
+      <DependentUpon>frm_DownloadCVR.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Popoup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +96,9 @@
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_DownloadCVR.resx">
+      <DependentUpon>frm_DownloadCVR.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Popoup.resx">
       <DependentUpon>frm_Popoup.cs</DependentUpon>
     </EmbeddedResource>
@@ -365,6 +376,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Actiudit_Name.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download_30_Gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download_25_Gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download_30_Org.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Backward-30-Gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Backward-30-Org.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Backward-20-Gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Backward-20-Org.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Forward-20-Gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Forward-20-Org.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0.5x_30_gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0.5x_30_org.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0.25x_30_gry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0.25x_30_org.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

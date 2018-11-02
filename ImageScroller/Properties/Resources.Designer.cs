@@ -63,6 +63,46 @@ namespace ImageScroller.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _0_25x_30_gry {
+            get {
+                object obj = ResourceManager.GetObject("0.25x_30_gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0_25x_30_org {
+            get {
+                object obj = ResourceManager.GetObject("0.25x_30_org", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0_5x_30_gry {
+            get {
+                object obj = ResourceManager.GetObject("0.5x_30_gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _0_5x_30_org {
+            get {
+                object obj = ResourceManager.GetObject("0.5x_30_org", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _16x_30_gry {
             get {
                 object obj = ResourceManager.GetObject("16x_30_gry", resourceCulture);
@@ -206,6 +246,46 @@ namespace ImageScroller.Properties {
         internal static System.Drawing.Bitmap audit_30_orange {
             get {
                 object obj = ResourceManager.GetObject("audit_30_orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Backward_20_Gry {
+            get {
+                object obj = ResourceManager.GetObject("Backward-20-Gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Backward_20_Org {
+            get {
+                object obj = ResourceManager.GetObject("Backward-20-Org", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Backward_30_Gry {
+            get {
+                object obj = ResourceManager.GetObject("Backward-30-Gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Backward_30_Org {
+            get {
+                object obj = ResourceManager.GetObject("Backward-30-Org", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,6 +463,36 @@ namespace ImageScroller.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Download_25_Gry {
+            get {
+                object obj = ResourceManager.GetObject("Download_25_Gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Download_30_Gry {
+            get {
+                object obj = ResourceManager.GetObject("Download_30_Gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Download_30_Org {
+            get {
+                object obj = ResourceManager.GetObject("Download_30_Org", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap file_30_grey {
             get {
                 object obj = ResourceManager.GetObject("file_30_grey", resourceCulture);
@@ -396,6 +506,26 @@ namespace ImageScroller.Properties {
         internal static System.Drawing.Bitmap file_30_orange {
             get {
                 object obj = ResourceManager.GetObject("file_30_orange", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Forward_20_Gry {
+            get {
+                object obj = ResourceManager.GetObject("Forward-20-Gry", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Forward_20_Org {
+            get {
+                object obj = ResourceManager.GetObject("Forward-20-Org", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -18,6 +18,10 @@ namespace ImageScroller
 {
     public partial class ImageScrollerForm : Form
     {
+        cls_dbConnection cls_dbConnection = new cls_dbConnection();
+        cls_CompIp cls_CompIp = new cls_CompIp(); // class file declare for using function
+        int cd_ImageCount; // for the Max scroller time
+
         int X_Mouse;
         int Y_Mouse;
 
@@ -25,7 +29,7 @@ namespace ImageScroller
         string db_Name;
         string db_UserID;
         string db_Password;
-        string myIP;  // Computer IP
+        
         private string conn;
         private MySqlConnection connect;
 
@@ -36,7 +40,7 @@ namespace ImageScroller
 
         private int scrollIndex;
         private int scrollerMin = 1;
-        private int scrollerMax = 86399;
+        private int scrollerMax;//= 86399;
         private String scrollMaxTime = "00:00:00";  
         private String fileFormatType = "Number";
         private String fileNameExtension = "jpg";
@@ -59,25 +63,28 @@ namespace ImageScroller
         Bitmap StopImg = Properties.Resources.stopbutton40;
         Bitmap StopBlackImg = Properties.Resources.StopBlack;       
 
-        Bitmap ContinueGryImg = Properties.Resources.Continue_30_grey;
+        // Used images 
+        Bitmap PlayGryImg = Properties.Resources.play_30_grey; // Play
+        Bitmap PlayOrgImg = Properties.Resources.play_30_orange;
+        Bitmap PauseGryImg = Properties.Resources.pause_30_grey; // Pause
+        Bitmap PauseOrgImg = Properties.Resources.pause_30_orange;
+        Bitmap StopGryImg = Properties.Resources.stop_30_grey; // Stop
+        Bitmap StopOrgImg = Properties.Resources.stop_30_orange;
+        Bitmap FileGryImg = Properties.Resources.file_30_grey;// File Save CSV
+        Bitmap FileOrgImg = Properties.Resources.file_30_orange;
+        Bitmap AuditGryImg = Properties.Resources.audit_30_grey;// Audit
+        Bitmap AuditOrgImg = Properties.Resources.audit_30_orange;
+        Bitmap ContinueGryImg = Properties.Resources.Continue_30_grey;// Continue Audit
         Bitmap ContinueOrgImg = Properties.Resources.Continue_30_orange;
 
-        Bitmap AuditGryImg = Properties.Resources.audit_30_grey;
-        Bitmap AuditOrgImg = Properties.Resources.audit_30_orange;
+        Bitmap BackwordOrgIamg = Properties.Resources.Backward_20_Org;
+        Bitmap BackwordGryIamg = Properties.Resources.Backward_20_Gry;
+        Bitmap ForwordOrgIamg = Properties.Resources.Forward_20_Org;
+        Bitmap ForwordGryIamg = Properties.Resources.Forward_20_Gry;
 
-        Bitmap FileGryImg = Properties.Resources.file_30_grey;
-        Bitmap FileOrgImg = Properties.Resources.file_30_orange;
+        Bitmap Spinner_org_148px = Properties.Resources.Spinner_Org_148px;// spinner
 
-        Bitmap StopGryImg = Properties.Resources.stop_30_grey;
-        Bitmap StopOrgImg = Properties.Resources.stop_30_orange;
-
-        Bitmap PauseGryImg = Properties.Resources.pause_30_grey;
-        Bitmap PauseOrgImg = Properties.Resources.pause_30_orange;
-
-        Bitmap PlayGryImg = Properties.Resources.play_30_grey;
-        Bitmap PlayOrgImg = Properties.Resources.play_30_orange;
-
-        Bitmap x1GryImg = Properties.Resources._1x_30_gry;
+        Bitmap x1GryImg = Properties.Resources._1x_30_gry;// forwaord backword play
         Bitmap X1OrgImg = Properties.Resources._1x_30_org;
         Bitmap x2GryImg = Properties.Resources._2x_30_gry;
         Bitmap X2OrgImg = Properties.Resources._2x_30_org;
@@ -86,11 +93,13 @@ namespace ImageScroller
         Bitmap x8GryImg = Properties.Resources._8x_30_gry;
         Bitmap X8OrgImg = Properties.Resources._8x_30_org;
         Bitmap x16GryImg = Properties.Resources._16x_30_gry;
-        Bitmap X16rgImg = Properties.Resources._16x_30_org;
+        Bitmap X16OrgImg = Properties.Resources._16x_30_org;
         Bitmap x32ryImg = Properties.Resources._32x_30_gry;
-        Bitmap X32rgImg = Properties.Resources._32x_30_org;
-
-        Bitmap Spinner_org_148px = Properties.Resources.Spinner_Org_148px;
+        Bitmap X32OrgImg = Properties.Resources._32x_30_org;
+        Bitmap x05GryImg = Properties.Resources._0_5x_30_gry;
+        Bitmap X05OrgImg = Properties.Resources._0_5x_30_org;
+        Bitmap x025GryImg = Properties.Resources._0_25x_30_gry;
+        Bitmap X025OrgImg = Properties.Resources._0_25x_30_org;
 
         private string Path_SaveSnapShot;
 
@@ -110,7 +119,8 @@ namespace ImageScroller
         public ImageScrollerForm()
         {
             InitializeComponent();
-            initChannelDisplayForm();
+            WindowState = FormWindowState.Maximized;
+            initChannelDisplayForm();          
         }
 
         #region Data Base
@@ -170,6 +180,7 @@ namespace ImageScroller
         // Get Project Id From db
         private void Get_dbProjectID(out string db_ProjectID, ref string db_ProjectName)
         {
+            cls_CompIp.Get_ipAddress(out string myIP); // Computer Ip adddress
             db_connection();
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = "SELECT Project_ID,Project_Type FROM project_detail WHERE Project_name = '" + CurrProjectName_label.Text + "' AND computer_IP = '" + myIP + "' ";
@@ -188,6 +199,9 @@ namespace ImageScroller
         // Get Project Check Channel From db 
         private void Get_dbSaveChannel()
         {
+            cd_ImageCount = 0;
+            int count;
+            string[] CountScreenShot = new string[9];
             string[] ChannelNameArray = new string[9];
             CheckBox[] CheckBoxArray = new CheckBox[9];
             ChannelNameArray[0] = "Channel_1";
@@ -217,18 +231,27 @@ namespace ImageScroller
             Get_dbProjectID(out db_ProjectID, ref db_ProjectName);
 
             for (int i = 0; i < 9; i++)
-            {
+            {               
                 string Channel_Name = ChannelNameArray[i];
                 db_connection();
                 MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = "SELECT path_Snapshot,path_Video,img_Format,file_Type,file_VideoName FROM channel_detail WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
-                cmd.Parameters.AddWithValue("@Channel_name", Channel_Name);
-                cmd.Parameters.AddWithValue("@Project_ID", db_ProjectID);
+                cmd.CommandText = "SELECT path_Snapshot,path_Video,img_Format,file_Type,file_VideoName,cd_ImageCount FROM channel_detail " +
+                                        "WHERE Channel_name = '" + Channel_Name + "' AND Project_ID = '" + db_ProjectID + "'";
                 cmd.Connection = connect;
                 MySqlDataReader PChannelReder = cmd.ExecuteReader();
+               
                 if (PChannelReder.HasRows)
                 {
-                    CheckBoxArray[i].Checked = true;
+                    while (PChannelReder.Read())
+                    {
+                        CheckBoxArray[i].Checked = true;
+                        count = PChannelReder.GetInt32("cd_ImageCount");
+                        //CountScreenShot[i] = count;
+                        if (count >= cd_ImageCount)
+                        {
+                            cd_ImageCount = count;
+                        }
+                    }                    
                 }
                 else
                 {
@@ -269,54 +292,10 @@ namespace ImageScroller
             PChannelReder.Close();
             connect.Close();
         }
-
-        // Save ScrollIndex in Db
-        private void Save_ScrollIndex()
-        {
-            try
-            {
-                int _scrollIndex = scrollIndex;
-                db_connection();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = "UPDATE project_detail SET Scroll_Index='" + scrollIndex + "' WHERE 	Project_ID = '" + cp_ID + "'";
-
-                cmd.Connection = connect;
-                MySqlDataReader RRChannel = cmd.ExecuteReader();
-                connect.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        // Get ScrollIndex from Db
-        private void Get_ScrollIndex()
-        {
-            try
-            {
-                db_connection();
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.CommandText = "SELECT Scroll_Index FROM project_detail Where Project_ID = '" + cp_ID + "'";
-                cmd.Connection = connect;
-                MySqlDataReader cChannelReder = cmd.ExecuteReader();
-
-                while (cChannelReder.Read())
-                {
-                    String SIndex = cChannelReder.GetString("Scroll_Index");
-                    scrollIndex = Int32.Parse(SIndex);
-                }
-                cChannelReder.Close();
-
-                connect.Close();
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+                    
+      
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
         //Save Snap Shot
@@ -389,6 +368,7 @@ namespace ImageScroller
                     ChannelInfos[i].ImageViewer = pictureboxes[i];
                     ChannelInfos[i].ChannelNumber = i;
                     ChannelInfos[i].FileBasePath = null;
+                    ChannelInfos[i].VideoName = null;
                     channelSet.Add(i, ChannelInfos[i]);
                     
                     channelSet[i].isSelected = CheckBoxArray[i].Checked;
@@ -397,7 +377,7 @@ namespace ImageScroller
 
                     db_connection();
                     MySqlCommand cmd = new MySqlCommand();
-                    cmd.CommandText = "SELECT path_Snapshot,path_Video,img_Format,file_Type FROM channel_detail WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
+                    cmd.CommandText = "SELECT path_Snapshot,path_Video,img_Format,file_Type,file_VideoName FROM channel_detail WHERE Channel_name = @Channel_name AND Project_ID = @Project_ID";
                     cmd.Parameters.AddWithValue("@Channel_name", Channel_name);
                     cmd.Parameters.AddWithValue("@Project_ID", cp_ID);
                     cmd.Connection = connect;
@@ -405,7 +385,10 @@ namespace ImageScroller
                     while (PChannelReder.Read())
                     {
                         String PathSnapshote = PChannelReder.GetString("path_Snapshot"); // Play Snapshot File path
+                        String VideoName = PChannelReder.GetString("file_VideoName"); // Play Video Name
+                        VideoName = Path.GetFileNameWithoutExtension(VideoName);
                         channelSet[i].FileBasePath = PathSnapshote;
+                        channelSet[i].VideoName = VideoName;
                         fileFormatType = PChannelReder.GetString("img_Format"); // image format file
                         fileNameExtension = PChannelReder.GetString("file_Type"); // file type
                         String Path_video = PChannelReder.GetString("path_Video"); // video path where we select
@@ -613,9 +596,9 @@ namespace ImageScroller
         //Timer
         private void playTimer_Tick_1(object sender, EventArgs e)
         {            
-            if (scrollIndex >= scrollerMax)
+            if (scrollIndex >= cd_ImageCount)
             {
-                scrollIndex = scrollerMax;
+                scrollIndex = cd_ImageCount;
                 pauseScroller();
             }
             else
@@ -639,7 +622,6 @@ namespace ImageScroller
                     db_connection();
                     MySqlCommand cmd = new MySqlCommand();
                     cmd.CommandText = "SELECT Path_ChannelTag,Channel_Name,tag_reason,path_SysVideo FROM project_tag WHERE Project_ID = @Project_ID";
-
                     cmd.Parameters.AddWithValue("@Project_ID", cp_ID);
                     cmd.Connection = connect;
                     MySqlDataReader PChannelReder = cmd.ExecuteReader();
@@ -829,10 +811,10 @@ namespace ImageScroller
         {
             scrollIndex = scrollerMin;
             imageScroller.Minimum = scrollerMin;
-            imageScroller.Maximum = scrollerMax;
+            imageScroller.Maximum = cd_ImageCount;
             imageScroller.Value = scrollIndex;
 
-            scrollMaxTime = getScrollTimeSpan(scrollerMax).ToString();
+            scrollMaxTime = getScrollTimeSpan(cd_ImageCount).ToString();
         }
 
         private TimeSpan getScrollTimeSpan(int timeSpanSeconds)
@@ -981,6 +963,7 @@ namespace ImageScroller
                     ChannelInfos[i].cs_isSelected = false;
                 }                                
             }
+
             if (SnapShortSave != null && !string.IsNullOrEmpty(SnapShortSave))
             {
                 FileOperation fileOps = new FileOperation();
@@ -996,11 +979,12 @@ namespace ImageScroller
                     {
                         if (CheckBoxArray[i].Checked == true)
                         {
+                            string VideoName = ChannelInfos[i].VideoName;
                             string Channel_Name = CNArray[i];
-                            string Channel_Tag2 = Path_SaveSnapShot + "\\" + TagReason + "\\" + Channel_Name;
+                            string Channel_Tag2 = Path_SaveSnapShot + "\\" + TagReason + "\\" + VideoName;
                             string pathWithoutLastFolder = Path_SaveSnapShot;
                             Path_SysVideo = Path.GetDirectoryName(pathWithoutLastFolder);
-                            Insert_ProjectTag(TagReason, Path_SaveSnapShot, TagImage, Channel_Tag2, Channel_Name, Path_SysVideo);
+                            Insert_ProjectTag(TagReason, Path_SaveSnapShot, TagImage, Channel_Tag2, VideoName, Path_SysVideo);
                         }
                     }
                 }
@@ -1016,7 +1000,7 @@ namespace ImageScroller
             playScroller();                    
         }
 
-        public void Insert_ProjectTag(String TagReason, String Path_SaveSnapShot, String TagImage, String Channel_Tag, String Channel_Name, String Path_SysVideo)
+        public void Insert_ProjectTag(String TagReason, String Path_SaveSnapShot, String TagImage, String Channel_Tag, String VideoName, String Path_SysVideo)
         {
             string Path_Type = Path_SaveSnapShot + "\\" + TagType;
             string Path_reason = Path_SaveSnapShot + "\\" + TagReason; ;
@@ -1035,7 +1019,7 @@ namespace ImageScroller
             cmd.Parameters.AddWithValue("@Project_id", cp_ID);
             cmd.Parameters.AddWithValue("@TagImage", TagImage);
             cmd.Parameters.AddWithValue("@Channel_Tag", Channel_Tag);
-            cmd.Parameters.AddWithValue("@Channel_Name", Channel_Name);
+            cmd.Parameters.AddWithValue("@Channel_Name", VideoName);
             cmd.Parameters.AddWithValue("@Path_SysVideo", Path_SysVideo);
             cmd.Parameters.AddWithValue("@Path_VideoTag", SaveVideoPath);
             cmd.Connection = connect;
@@ -1086,7 +1070,7 @@ namespace ImageScroller
                 }
             }
         }
-
+        
         private String getCurrentImageFileName(int currentScrollIndex)
         {
             String currentImageFilename = String.Empty;
@@ -1159,9 +1143,19 @@ namespace ImageScroller
                     else if (PB_X.Image == x8GryImg)
                     { PB_X.Image = X8OrgImg; }
                     else if (PB_X.Image == x16GryImg)
-                    { PB_X.Image = X16rgImg; }
+                    { PB_X.Image = X16OrgImg; }
                     else if (PB_X.Image == x32ryImg)
-                    { PB_X.Image = X32rgImg; }
+                    { PB_X.Image = X32OrgImg; }
+                    else if (PB_X.Image == x05GryImg)
+                    { PB_X.Image = X05OrgImg; }
+                    else if (PB_X.Image == x025GryImg)
+                    { PB_X.Image = X025OrgImg; }
+                    break;
+                case "PB_BackWord1":
+                    PB_BackWord1.Image = BackwordOrgIamg;
+                    break;
+                case "PB_ForWord1":
+                    PB_ForWord1.Image = ForwordOrgIamg;
                     break;
                 case "PB_CompAuditing":
                     PB_CompAuditing.Image = AuditOrgImg;
@@ -1199,11 +1193,21 @@ namespace ImageScroller
                     { PB_X.Image = x4GryImg; }
                     else if (PB_X.Image == X8OrgImg)
                     { PB_X.Image = x8GryImg; }
-                    else if (PB_X.Image == X16rgImg)
+                    else if (PB_X.Image == X16OrgImg)
                     { PB_X.Image = x16GryImg; }
-                    else if (PB_X.Image == X32rgImg)
+                    else if (PB_X.Image == X32OrgImg)
                     { PB_X.Image = x32ryImg; }
+                    else if (PB_X.Image == X05OrgImg)
+                    { PB_X.Image = x05GryImg; }
+                    else if (PB_X.Image == X025OrgImg)
+                    { PB_X.Image = x025GryImg; }
                     mv_Control.Text = "";
+                    break;
+                case "PB_BackWord1":
+                    PB_BackWord1.Image = BackwordGryIamg;
+                    break;
+                case "PB_ForWord1":
+                    PB_ForWord1.Image = ForwordGryIamg;
                     break;
                 case "PB_Continue":
                     PB_Continue.Image = ContinueGryImg;
@@ -1251,7 +1255,17 @@ namespace ImageScroller
                 case "PB_X":
                     var screenPosition3 = this.PointToScreen(PB_X.Location);
                     this.mv_Control.Location = new Point(X_Mouse + 10 + screenPosition3.X, Y_Mouse + 10 + screenPosition3.Y);
-                    mv_Control.Text = "Fast Forward";
+                    mv_Control.Text = "Reset at 1X";
+                    break;
+                case "PB_BackWord1":
+                    var screenPositionBack = this.PointToScreen(PB_X.Location);
+                    this.mv_Control.Location = new Point(X_Mouse + 10 + screenPositionBack.X, Y_Mouse + 10 + screenPositionBack.Y);
+                    mv_Control.Text = "Backword";
+                    break;
+                case "PB_ForWord1":
+                    var screenPositionFor = this.PointToScreen(PB_X.Location);
+                    this.mv_Control.Location = new Point(X_Mouse + 10 + screenPositionFor.X, Y_Mouse + 10 + screenPositionFor.Y);
+                    mv_Control.Text = "Forword";
                     break;
                 case "PB_Continue":
                     var screenPosition4 = this.PointToScreen(PB_Continue.Location);
@@ -1561,7 +1575,7 @@ namespace ImageScroller
         // Load 
         private void FormLoad()
         {
-            myIP = frm_SaveChannel.myIP;  // Computer IP
+            //myIP = frm_SaveChannel.myIP;  // Computer IP
             CurrProjectName_label.Text = frm_SaveChannel.c_proName;  // Project Name
             lab_ProjectType.Text = frm_SaveChannel.c_proType;  // Project Type
             Curr_ProjectID.Text = cp_ID; // Project ID
@@ -1574,20 +1588,20 @@ namespace ImageScroller
         
         // Form Load
         private void ImageScrollerForm_Load_1(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Maximized;
+        {          
             SetLoading(false);
             FormLoad();
             PB_play.Image = PlayGryImg;
             //PB_Stop.Image = StopImg;
             PB_X.Image = x1GryImg;
             //Get_ScrollIndex();
+            
         }
 
         // btn Play
         private void scrollPlay_Click_1(object sender, EventArgs e)
         {
-            btn_2x.Text = "1X";
+            btn_2x.Text = "1";
             playTimer.Interval = 1000;
             playScroller(); // Play Channels
             btn_snapshot.Enabled = true;
@@ -1644,98 +1658,152 @@ namespace ImageScroller
             FormLoad();
             PB_play.Image = PlayGryImg; // Set Play image
             PB_X.Image = x1GryImg;   // Set X image
-            btn_2x.Text = "1X";
+            btn_2x.Text = "1";
             playTimer.Interval = 1000;
             btn_SnapTOVideo.Enabled = true; // SnapShort
             button1.Enabled = true; // Btn Reset       
         }
-      
-        // Btn X1,X2.....X32
+
+        // Btn X1,X2.....X32        
         private void btn_2x_Click(object sender, EventArgs e)
         {
-            if (btn_2x.Text == "1X")
+            if (btn_2x.Text == "1")
             {
                 playTimer.Interval = 500;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "2X";
+                btn_2x.Text = "2";
             }
-            else if (btn_2x.Text == "2X")
+            else if (btn_2x.Text == "2")
             {
                 playTimer.Interval = 250;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "4X";
+                btn_2x.Text = "4";
             }
-            else if (btn_2x.Text == "4X")
+            else if (btn_2x.Text == "4")
             {
                 playTimer.Interval = 125;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "8X";
+                btn_2x.Text = "8";
             }
-            else if (btn_2x.Text == "8X")
+            else if (btn_2x.Text == "8")
             {
                 playTimer.Interval = 62;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "16X";
+                btn_2x.Text = "16";
             }
-            else if (btn_2x.Text == "16X")
+            else if (btn_2x.Text == "16")
             {
                 playTimer.Interval = 31;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "32X";
+                btn_2x.Text = "32";
             }
-            else if (btn_2x.Text == "32X")
+            else if (btn_2x.Text == "32")
             {
                 playTimer.Interval = 1000;
                 scrollPlay.Enabled = true;
-                btn_2x.Text = "1X";
+                btn_2x.Text = "1";
             }
         }
         private void PB_X_Click(object sender, EventArgs e)
         {
-            if (btn_2x.Text == "1X")
+            string PictureBoxText = ((PictureBox)sender).Name;
+            int Fplay = Int32.Parse(btn_2x.Text);
+            switch (PictureBoxText)
             {
-                playTimer.Interval = 500;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "2X";
-                PB_X.Image = X2OrgImg;
+                //Forword
+                case "PB_X":
+                    Fplay = 1;
+                    playTimer.Interval = 1000;
+                    //if (Fplay == 32)
+                    //{
+                    //    Fplay = 1;
+                    //    playTimer.Interval = 1000;
+                    //}
+                    //else
+                    //{
+                    //    Fplay = Fplay * 2;
+                    //    playTimer.Interval = playTimer.Interval / 2;
+                    //}
+                    break;
+                //Forword
+                case "PB_ForWord1":
+                    // PB_X.Image = X16OrgImg;
+                    if (Fplay == 32)
+                    {
+                        Fplay = -2;
+                        playTimer.Interval = 1500;                       
+                    }
+                    else if (Fplay == -2)
+                    {
+                        Fplay = -1;
+                        playTimer.Interval = 1250;
+                    }
+                    else if (Fplay == -1)
+                    {
+                        Fplay = 1;
+                        playTimer.Interval = 1000;
+                    }
+                    else
+                    {
+                        Fplay = Fplay * 2;
+                        playTimer.Interval = playTimer.Interval / 2;
+                    }
+                    break;
+                //Backword
+                case "PB_BackWord1":
+                    if (Fplay == 1)
+                    {
+                        Fplay = -1;
+                        playTimer.Interval = 1250;                       
+                    }
+                    else if (Fplay == -1)
+                    {
+                        Fplay = -2;
+                        playTimer.Interval = 1500;
+                    }
+                    else if (Fplay == -2)
+                    {
+                        Fplay = 32;
+                        playTimer.Interval = playTimer.Interval / 32;
+                    }
+                    else
+                    {
+                        Fplay = Fplay / 2;
+                        playTimer.Interval = playTimer.Interval * 2;
+                    }
+                    //PB_X.Image = X32OrgImg;
+                    break;
+                default:
+                    break;
             }
-            else if (btn_2x.Text == "2X")
+
+            scrollPlay.Enabled = true;
+            btn_2x.Text = Fplay.ToString();
+
+            // Change teh 1x,2x .. images
+            switch (Fplay)
             {
-                playTimer.Interval = 250;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "4X";
-                PB_X.Image = X4OrgImg;
-            }
-            else if (btn_2x.Text == "4X")
-            {
-                playTimer.Interval = 125;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "8X";
-                PB_X.Image = X8OrgImg;
-            }
-            else if (btn_2x.Text == "8X")
-            {
-                playTimer.Interval = 62;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "16X";
-                PB_X.Image = X16rgImg;
-            }
-            else if (btn_2x.Text == "16X")
-            {
-                playTimer.Interval = 31;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "32X";
-                PB_X.Image = X32rgImg;
-            }
-            else if (btn_2x.Text == "32X")
-            {
-                playTimer.Interval = 1000;
-                scrollPlay.Enabled = true;
-                btn_2x.Text = "1X";
-                PB_X.Image = X1OrgImg;
+                case -1:
+                    PB_X.Image = x05GryImg; break;
+                case -2:
+                    PB_X.Image = x025GryImg; break;
+                case 1:
+                    PB_X.Image = x1GryImg; break;
+                case 2:
+                    PB_X.Image = x2GryImg; break;
+                case 4:
+                    PB_X.Image = x4GryImg; break;
+                case 8:
+                    PB_X.Image = x8GryImg; break;
+                case 16:
+                    PB_X.Image = x16GryImg; break;
+                case 32:
+                    PB_X.Image = x32ryImg; break;
+                default:
+                    break;
             }
         }
-               
+       
         // btn Snapshot
         private void btn_snapshot_Click(object sender, EventArgs e)
         {
@@ -1749,10 +1817,9 @@ namespace ImageScroller
                 beforeSave();
                 pauseScroller();
                 // saveScreenshot();
-                frm_Popoup fP = new frm_Popoup(this);
-                fP.Show();
-                //saveScreenshot();
                 //afterSave();
+                frm_Popoup fP = new frm_Popoup(this);
+                fP.Show();              
             }
         }
 
@@ -1789,11 +1856,11 @@ namespace ImageScroller
             if (channel1_chk.Checked != false || channel2_chk.Checked != false || channel3_chk.Checked != false || channel4_chk.Checked != false ||
                channel5_chk.Checked != false || channel6_chk.Checked != false || channel7_chk.Checked != false || channel8_chk.Checked != false || channel9_chk.Checked != false)
             {
-                Get_ScrollIndex();
+                cls_dbConnection.Get_ScrollIndex(ref scrollIndex, cp_ID); // Get ScrollIndex from Db
                 if (scrollIndex != 0)
                 {
                     PB_play.Image = PauseGryImg;
-                    btn_2x.Text = "1X";
+                    btn_2x.Text = "1";
                     playTimer.Interval = 1000;
                     PB_X.Image = x1GryImg;
                     btn_SnapTOVideo.Enabled = true;
@@ -1814,12 +1881,12 @@ namespace ImageScroller
         {
             if (channel1_chk.Checked != false || channel2_chk.Checked != false || channel3_chk.Checked != false || channel4_chk.Checked != false ||
                channel5_chk.Checked != false || channel6_chk.Checked != false || channel7_chk.Checked != false || channel8_chk.Checked != false || channel9_chk.Checked != false)
-            {
-                Get_ScrollIndex();
+            {                
+                cls_dbConnection.Get_ScrollIndex(ref scrollIndex, cp_ID); // Get ScrollIndex from Db
                 if (scrollIndex != 0)
                 {
                     PB_play.Image = PauseImg;
-                    btn_2x.Text = "1X";
+                    btn_2x.Text = "1";
                     playTimer.Interval = 1000;
                     PB_X.Image = x1GryImg;
                     btn_SnapTOVideo.Enabled = true;
@@ -1868,7 +1935,7 @@ namespace ImageScroller
         // btn Convert Snap To Video 
         private void PB_CompAuditing_Click(object sender, EventArgs e)
         {
-            Save_ScrollIndex(); // Save scroll index in Db            
+            cls_dbConnection.Update_ScrollIndex(scrollIndex, cp_ID);  // Save scroll index in Db            
             pauseScroller();
             try
             {
@@ -1883,7 +1950,7 @@ namespace ImageScroller
         }
         private void btn_SnapTOVideo_Click(object sender, EventArgs e)
         {
-            Save_ScrollIndex(); // Save scroll index in Db            
+            cls_dbConnection.Update_ScrollIndex(scrollIndex, cp_ID);  // Save scroll index in Db         
 
             try
             {
@@ -1945,9 +2012,7 @@ namespace ImageScroller
         {
             //loadChannels(); // Load Channels
         }
-
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
-           
-                     
+       
     }
 }

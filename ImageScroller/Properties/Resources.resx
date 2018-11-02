@@ -121,14 +121,17 @@
   <data name="Check_mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Check_mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Backward-30-Gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Backward-30-Gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="8x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\8x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="16x_30_org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\16x_30_org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PauseBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PauseBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Continue_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Continue_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1x_30_org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1x_30_org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,14 +139,14 @@
   <data name="playbutton40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\playbutton40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="x4button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\x4button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Backward-20-Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Backward-20-Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Verifired_30_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Verifired_30_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="x8button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\x8button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="resume_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\resume_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Clear_30_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clear_30_White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +157,8 @@
   <data name="stop_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stop_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="2x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\2x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Download_30_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Download_30_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="merge(white)_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\merge(white)_30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,17 +169,23 @@
   <data name="x1button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x1button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pause_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pause_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="x32button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x32button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="8x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\8x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Check.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="play_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="x16button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x16button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stopbutton40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stopbutton40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="merge(orange)_30 " type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\merge(orange)_30 .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StopBlack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StopBlack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,17 +193,23 @@
   <data name="32x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\32x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Forward-20-Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forward-20-Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Chk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Check.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Clear_30_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Clear_30_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="16x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\16x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="btn_Load" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\btn_Load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pause_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pause_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Forward-20-Gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Forward-20-Gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="play_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,6 +223,9 @@
   <data name="resume_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\resume_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Download_30_Gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Download_30_Gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="PlayBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PlayBack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -216,9 +234,6 @@
   </data>
   <data name="Continue_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Continue_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="play_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pause_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pause_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,9 +244,6 @@
   <data name="1x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Spinner_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Spinner_Org.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="file_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -241,11 +253,11 @@
   <data name="Browse_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Browse_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="resume_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\resume_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Spinner_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Spinner_Org.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Clear_30_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Clear_30_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Download_25_Gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Download_25_Gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="btn_LoadS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_LoadS.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -253,8 +265,11 @@
   <data name="btn_LoadBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\btn_LoadBig.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="stopbutton40" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stopbutton40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="4x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Continue_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Continue_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="noimage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\noimage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -280,6 +295,9 @@
   <data name="4x_30_org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4x_30_org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Backward-30-Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Backward-30-Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Spinner_Org_148px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spinner_Org_148px.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -295,14 +313,20 @@
   <data name="Check_mark2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Check_mark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="merge(orange)_30 " type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\merge(orange)_30 .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="2x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="x2Black40.png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x2Black40.png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="x4button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\x4button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="audit_30_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\audit_30_orange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Actiudit_Name" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Actiudit_Name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Search_18_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Search_18_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,19 +337,34 @@
   <data name="file_30_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\file_30_grey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="btn_Load" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_Load.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pausebutton40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pausebutton40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Browse_30_Org" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Browse_30_Org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="4x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Backward-20-Gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Backward-20-Gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="x8button40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\x8button40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="x4Black40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\x4Black40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Actiudit_Name" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Actiudit_Name.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="0.5x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0.5x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="0.5x_30_org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0.5x_30_org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="0.25x_30_gry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0.25x_30_gry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="0.25x_30_org" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0.25x_30_org.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

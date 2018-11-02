@@ -1,7 +1,0 @@
-1. Installed ffmpeg 
-
-2. Craete Database : imagescroller.sql
-
-3. Data Base String Can Be Written in Exe Folder File DataBaseConnection.txt
-
-	put that file where exe are stored and change the mysql variables

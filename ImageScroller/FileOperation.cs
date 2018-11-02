@@ -24,11 +24,13 @@ namespace ImageScroller
                         if (_channelInfo.isSelected && _channelInfo.cs_isSelected && _channelInfo.FileBasePath != null && !string.IsNullOrEmpty(_channelInfo.FileBasePath))
                         {
                             System.Windows.Forms.PictureBox _imageViewer = new System.Windows.Forms.PictureBox();
-                            String sourcePath = string.Empty;                           
+                            String sourcePath = string.Empty;
+                            String VideoName = string.Empty;
 
                             int Add_Channe = _channelInfo.ChannelNumber;
                             int _channelNumber = Add_Channe + 1;
                             sourcePath = _channelInfo.FileBasePath;
+                            VideoName = _channelInfo.VideoName;
                             if (!sourcePath.Substring(sourcePath.Length - 1, 1).Equals("\\"))
                             {
                                 sourcePath = sourcePath + "\\";
@@ -44,7 +46,8 @@ namespace ImageScroller
                             {
                                 Directory.CreateDirectory(TagReasonPath);
                             }
-                            destinationPath = TagReasonPath + "\\" + "Channel_" + _channelNumber.ToString() + "\\";
+                            //destinationPath = TagReasonPath + "\\" + "Channel_" + _channelNumber.ToString() + "\\";
+                            destinationPath = TagReasonPath + "\\" + VideoName + "\\";
                             if (!Directory.Exists(destinationPath))
                             {
                                 Directory.CreateDirectory(destinationPath);
@@ -58,42 +61,43 @@ namespace ImageScroller
                                 // string value = "0000" + name.ToString();
                                 string CIFN = value2 + jpg;
                                 File.Copy(sourcePath + currentImageFilename, destinationPath + CIFN, true);
-                               
-                                //A1
-                                //int A1 = Int32.Parse(name) + 1;
-                                string A1_name = (Int32.Parse(name) + 1).ToString();
-                                string A1jpg = Int32.Parse(name) + 1 + jpg;
-                                string A1value = String.Format("{0:D5}", A1jpg);
-                                string A1value1 = A1_name.PadLeft(5, '0');
-                                string A1CIFN = A1value1 + jpg;
-                                File.Copy(sourcePath + A1jpg, destinationPath + A1CIFN, true);
-                                //A2
-                                string A2_name = (Int32.Parse(name) + 2).ToString();
-                                string A2jpg = Int32.Parse(name) + 2 + jpg;
-                                string A2value = String.Format("{0:D5}", A2jpg);
-                                string A2value1 = A2_name.PadLeft(5, '0');
-                                string A2CIFN = A2value1 + jpg;
-                                File.Copy(sourcePath + A2jpg, destinationPath + A2CIFN, true);
-                                //S1
-                                string S1_name = (Int32.Parse(name) - 1).ToString();
-                                int S1int = Int32.Parse(name) - 1;
-                                string S1jpg = S1int.ToString() + jpg;
-                                string S1value = String.Format("{0:D5}", S1jpg);
-                                string S1value1 = S1_name.PadLeft(5, '0');
-                                string S1CIFN = S1value1 + jpg;
-                                File.Copy(sourcePath + S1jpg, destinationPath + S1CIFN, true);
-                                //S2
-                                string S2_name = (Int32.Parse(name) - 2).ToString();
-                                int S2int = Int32.Parse(name) - 2;
-                                string S2jpg = S2int.ToString() + jpg;
-                                string S2value = String.Format("{0:D5}", S2jpg);
-                                string S2value1 = S2_name.PadLeft(5, '0');
-                                string S2CIFN = S2value1 + jpg;
-                                File.Copy(sourcePath + S2jpg, destinationPath + S2CIFN, true);
 
-                                String_Iamges = S2CIFN + ";" + S1CIFN + ";" + CIFN + ";" + A1CIFN + ";" + A2CIFN;
-                                                              
-                                saveSuccess = "true";                                
+                                // for 5 img store when snapshot
+                                ////A1
+                                ////int A1 = Int32.Parse(name) + 1;
+                                //string A1_name = (Int32.Parse(name) + 1).ToString();
+                                //string A1jpg = Int32.Parse(name) + 1 + jpg;
+                                //string A1value = String.Format("{0:D5}", A1jpg);
+                                //string A1value1 = A1_name.PadLeft(5, '0');
+                                //string A1CIFN = A1value1 + jpg;
+                                //File.Copy(sourcePath + A1jpg, destinationPath + A1CIFN, true);
+                                ////A2
+                                //string A2_name = (Int32.Parse(name) + 2).ToString();
+                                //string A2jpg = Int32.Parse(name) + 2 + jpg;
+                                //string A2value = String.Format("{0:D5}", A2jpg);
+                                //string A2value1 = A2_name.PadLeft(5, '0');
+                                //string A2CIFN = A2value1 + jpg;
+                                //File.Copy(sourcePath + A2jpg, destinationPath + A2CIFN, true);
+                                ////S1
+                                //string S1_name = (Int32.Parse(name) - 1).ToString();
+                                //int S1int = Int32.Parse(name) - 1;
+                                //string S1jpg = S1int.ToString() + jpg;
+                                //string S1value = String.Format("{0:D5}", S1jpg);
+                                //string S1value1 = S1_name.PadLeft(5, '0');
+                                //string S1CIFN = S1value1 + jpg;
+                                //File.Copy(sourcePath + S1jpg, destinationPath + S1CIFN, true);
+                                ////S2
+                                //string S2_name = (Int32.Parse(name) - 2).ToString();
+                                //int S2int = Int32.Parse(name) - 2;
+                                //string S2jpg = S2int.ToString() + jpg;
+                                //string S2value = String.Format("{0:D5}", S2jpg);
+                                //string S2value1 = S2_name.PadLeft(5, '0');
+                                //string S2CIFN = S2value1 + jpg;
+                                //File.Copy(sourcePath + S2jpg, destinationPath + S2CIFN, true);
+
+                                //String_Iamges = S2CIFN + ";" + S1CIFN + ";" + CIFN + ";" + A1CIFN + ";" + A2CIFN;
+                                String_Iamges = CIFN;
+                             saveSuccess = "true";                                
                             }
                             else
                             {

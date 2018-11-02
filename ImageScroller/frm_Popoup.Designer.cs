@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.lab_Close = new System.Windows.Forms.Label();
             this.btn_Save = new System.Windows.Forms.Button();
             this.txt_EnterInput = new System.Windows.Forms.TextBox();
             this.cmb_TagReason = new System.Windows.Forms.ComboBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel9.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +52,28 @@
             this.groupBox1.Size = new System.Drawing.Size(266, 209);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(98)))), ((int)(((byte)(34)))));
+            this.panel9.Controls.Add(this.label2);
+            this.panel9.Controls.Add(this.lab_Close);
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(266, 25);
+            this.panel9.TabIndex = 925;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(7, 1);
+            this.label2.Margin = new System.Windows.Forms.Padding(0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 20);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Reason Tag";
             // 
             // lab_Close
             // 
@@ -98,28 +120,6 @@
             this.cmb_TagReason.Text = "Select Reason";
             this.cmb_TagReason.SelectedIndexChanged += new System.EventHandler(this.cmb_TagReason_SelectedIndexChanged);
             // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(98)))), ((int)(((byte)(34)))));
-            this.panel9.Controls.Add(this.label2);
-            this.panel9.Controls.Add(this.lab_Close);
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(266, 25);
-            this.panel9.TabIndex = 925;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(7, 1);
-            this.label2.Margin = new System.Windows.Forms.Padding(0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 20);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Reason Tag";
-            // 
             // frm_Popoup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,7 +147,7 @@
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.TextBox txt_EnterInput;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lab_Close;
+        private System.Windows.Forms.Label label2;
     }
 }
