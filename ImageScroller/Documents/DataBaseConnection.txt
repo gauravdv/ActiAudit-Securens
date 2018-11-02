@@ -1,1 +1,1 @@
-192.168.1.253;ActiAudit;root;mysql@123;	
+localhost;imagescroller;root;;	

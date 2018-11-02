@@ -1,0 +1,12 @@
+https://www.wikihow.com/Install-FFmpeg-on-Windows
+
+
+Computer
+--> Properties
+--> Advanced Sysytem Settings
+--> Advanced
+--> Envieonment Variables
+--> Double-click the Path value OR cretate New 
+	variables Name : Path
+	Variable Value : C:\ffmpeg\bin
+
