@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageScroller", "ImageScroller\ImageScroller.csproj", "{96B9AB62-8BF5-430C-8726-B77612E27541}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Acti Audit - MySetUp", "MySetUp - ActiAudit\MySetUp - ActiAudit.vdproj", "{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.1.1.", "MySetUp-v1.3.1.1.\MySetUp-v1.3.1.1..vdproj", "{96830DC3-D056-439C-93FA-38A89375A196}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ActiAudit_V_03", "ActiAudit_V_03\ActiAudit_V_03.vdproj", "{EC1F323A-8F64-4D09-955D-4523B2F98C1F}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.1.1", "MySetUp-ActiAudit-v1.3.1.1\MySetUp-ActiAudit-v1.3.1.1.vdproj", "{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96B9AB62-8BF5-430C-8726-B77612E27541}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}.Debug|Any CPU.ActiveCfg = Debug
-		{2AE4C5F5-14EC-4C04-8C07-4A763E24ACD7}.Release|Any CPU.ActiveCfg = Release
-		{EC1F323A-8F64-4D09-955D-4523B2F98C1F}.Debug|Any CPU.ActiveCfg = Debug
-		{EC1F323A-8F64-4D09-955D-4523B2F98C1F}.Release|Any CPU.ActiveCfg = Release
+		{96830DC3-D056-439C-93FA-38A89375A196}.Debug|Any CPU.ActiveCfg = Debug
+		{96830DC3-D056-439C-93FA-38A89375A196}.Release|Any CPU.ActiveCfg = Release
+		{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}.Debug|Any CPU.ActiveCfg = Debug
+		{01B86426-B6AE-48B8-9D9D-94C26D8F2F44}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
