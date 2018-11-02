@@ -4,17 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F9B508C4-30E3-448D-8007-58721C44BE6E}</ProjectGuid>
+    <ProjectGuid>{96B9AB62-8BF5-430C-8726-B77612E27541}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ImageScroller</RootNamespace>
-    <AssemblyName>ImageScroller</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AssemblyName>Acti Audit</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,8 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.Microsoft.Office.Core">
+      <HintPath>..\..\Try\Interop.Microsoft.Office.Core.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Access, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Software\Microsoft.Office.Interop.Access\Microsoft.Office.Interop.Access.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +59,18 @@
   <ItemGroup>
     <Compile Include="ChannelInfo.cs" />
     <Compile Include="FileOperation.cs" />
+    <Compile Include="frm_Popoup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Popoup.Designer.cs">
+      <DependentUpon>frm_Popoup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_SaveChannel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_SaveChannel.Designer.cs">
+      <DependentUpon>frm_SaveChannel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageScrollerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,8 +79,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_Popoup.resx">
+      <DependentUpon>frm_Popoup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_SaveChannel.resx">
+      <DependentUpon>frm_SaveChannel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ImageScrollerForm.resx">
       <DependentUpon>ImageScrollerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -70,6 +98,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -82,11 +111,116 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="Images\noimage.png" />
+    <None Include="Resources\Check.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Check_mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\noimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Excel">
+      <Guid>{45541000-5750-5300-4B49-4E47534F4655}</Guid>
+      <VersionMajor>3</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Office">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>99</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PauseBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pausebutton40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PlayBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playbutton40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StopBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopbutton40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x1Black40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x1button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x2Black40.png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x2button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x4Black40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x4button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x8Black40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x8button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x16Black40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x16button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x32Black40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x32button40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x2Black4000.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Btn_A.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

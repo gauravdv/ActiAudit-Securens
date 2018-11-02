@@ -12,5 +12,6 @@ namespace ImageScroller
 		public Object ImageViewer { get; set; }
 		public String FileBasePath { get; set; }
 		public bool isSelected { get; set; }
-	}	
+        public bool cs_isSelected { get; set; }
+    }	
 }
