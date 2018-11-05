@@ -489,12 +489,13 @@ namespace ImageScroller
                     string VideoFileName = System.IO.Path.GetFileNameWithoutExtension(FileName);
 
                     string cSnapshotFolder_path = vfolder_path + "\\" + cp_ID + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path    
-                    string cSnapshotFolder_path_2 = vfolder_path + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path   
+                    //string cSnapshotFolder_path_2 = vfolder_path + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path // Video Path  
+                    string cSnapshotFolder_path_2 = "C:\\Securens" + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path // Securens Folder
                     //string cSnapshotFolder_path = vfolder_path + "\\" + cp_ID + "_" + _ProjectName + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path                
                     System.IO.Directory.CreateDirectory(cSnapshotFolder_path_2); // create folder
 
                     string tempFilename = Path.ChangeExtension(Path.GetTempFileName(), ".bat"); // create bat file
-                    string vp_Path = TextBoxArry[i].Text;
+                    string vp_Path = TextBoxArry[i].Text; // save for video path
                     string Vp_path_2 = "\"" + vp_Path + "\"";
 
                     Get_ChannelNo(out db_ChannelName, out db_ProjectID, ref _ChannelName);
@@ -1024,12 +1025,12 @@ namespace ImageScroller
             channel9_txt.Text = "";
         }
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+      
 
         #region Load, Click
         // Form Load
         private void frm_SaveChannel_Load(object sender, EventArgs e)
-        {            
+        {         
             Add_ListProjectName();
             Get_CmbTagType();
             //button1.Hide();

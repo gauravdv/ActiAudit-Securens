@@ -283,7 +283,8 @@ namespace ImageScroller
                 fileFormatType = PChannelReder.GetString("img_Format"); // image format file
                 fileNameExtension = PChannelReder.GetString("file_Type"); // file type
                 String Path_video = PChannelReder.GetString("path_Video"); // video path where we select
-                Path_SaveSnapShot = Path_video + "\\" + cp_ID +"-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path
+                //Path_SaveSnapShot = Path_video + "\\" + cp_ID +"-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path // video path
+                Path_SaveSnapShot = "C:\\Securens" + "\\" + cp_ID + "-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path // Securens path
                 string Path_User_SnapShot = Path_SaveSnapShot + "\\" + Channel_name; // 
                 db_VideoPath = Path_video;
                 db_SnapPath = Path_User_SnapShot;
@@ -394,7 +395,8 @@ namespace ImageScroller
                         String Path_video = PChannelReder.GetString("path_Video"); // video path where we select
 
                         // Path_SaveSnapShot = Path_video + "\\" + CurrProjectName_label.Text + "\\" + cf_UserS; // save snapshot path
-                        Path_SaveSnapShot = Path_video + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path
+                        Path_SaveSnapShot = Path_video + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path // Video path
+                        Path_SaveSnapShot = "C:\\Securens" + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path // Securens path
                     }
                     PChannelReder.Close();
                     connect.Close();

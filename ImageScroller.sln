@@ -9,9 +9,9 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.1.1"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.1.1.", "MySetUp-v1.3.1.1\MySetUp-v1.3.1.1..vdproj", "{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.2.1.", "MySetUp-v1.3.2.1.\MySetUp-v1.3.2.1..vdproj", "{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-v1.3.2.1.", "MySetUp-v1.3.2.1\MySetUp-v1.3.2.1..vdproj", "{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.2.1", "MySetUp-ActiAudit-v1.3.2.1\MySetUp-ActiAudit-v1.3.2.1.vdproj", "{84CEC408-EDD7-4909-BFCB-53CE861D53B6}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MySetUp-ActiAudit-v1.3.2.1", "MySetUp-ActiAudit-v1.3.2.1\MySetUp-ActiAudit-v1.3.2.1.vdproj", "{295AA51B-FB33-4AB4-9A82-96F0AD613F1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +33,8 @@ Global
 		{31BDBABF-99D8-40F1-9AA9-51B2E1F25F2C}.Release|Any CPU.Build.0 = Release
 		{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}.Debug|Any CPU.ActiveCfg = Debug
 		{7FE30E9C-8464-4FB4-973D-4FF6FCFD9DE9}.Release|Any CPU.ActiveCfg = Release
-		{84CEC408-EDD7-4909-BFCB-53CE861D53B6}.Debug|Any CPU.ActiveCfg = Debug
-		{84CEC408-EDD7-4909-BFCB-53CE861D53B6}.Release|Any CPU.ActiveCfg = Release
+		{295AA51B-FB33-4AB4-9A82-96F0AD613F1D}.Debug|Any CPU.ActiveCfg = Debug
+		{295AA51B-FB33-4AB4-9A82-96F0AD613F1D}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
