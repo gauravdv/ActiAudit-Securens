@@ -39,11 +39,12 @@ namespace ImageScroller
         string _Password = "Securens$#2018";
         int _LoginType = 0; //Login type. Reserved, set as 0.
         int iMqPort = 61618; //Port No. of MQ server, the default value is 61618.
-        string _ClientName = "Client_1";
+        string _ClientName = Environment.GetEnvironmentVariable("USERNAME");
         string format = "dd/MM/yyyy HH:mm:ss";
 
         public static string Download_Path;
         public static string _Percentage;
+        
 
         public frm_DownloadCVR(frm_SaveChannel frm_SaveChannel)
         {
@@ -52,9 +53,7 @@ namespace ImageScroller
         }    
 
         private void frm_DownloadCVR_Load(object sender, EventArgs e)
-        {
-           // lab_Progress.Hide();
-            //lab_Progress.Enabled = false;
+        {          
             try
             {
                 // Check frm_DownloadCVR only open once
@@ -68,13 +67,10 @@ namespace ImageScroller
 
                 cls_CompIp.Get_ipAddress(out string MyComp_Ip); // Computer Ip address
                 clientSocket.Connect(MyComp_Ip, 9001); // connection to socket clientSocket.Connect("192.168.1.52", 9001);
-
-                //AsynchronousClient.StartClient();
-
+           
                 if (clientSocket.Connected)
                 {
                     msg("Client Started");
-                    //label1.Text = "Client Socket Program - Server Connected ...";
                     _isConnected = true;
                 }
                 else
