@@ -163,14 +163,15 @@
             this.label1.Location = new System.Drawing.Point(7, 206);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 17);
-            this.label1.TabIndex = 22;
+            this.label1.TabIndex = 23;
             this.label1.Text = "Download Video";
             // 
             // btn_DownoladVideo
             // 
             this.btn_DownoladVideo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(98)))), ((int)(((byte)(34)))));
             this.btn_DownoladVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_DownoladVideo.Location = new System.Drawing.Point(161, 148);
+            this.btn_DownoladVideo.ForeColor = System.Drawing.Color.White;
+            this.btn_DownoladVideo.Location = new System.Drawing.Point(148, 147);
             this.btn_DownoladVideo.Name = "btn_DownoladVideo";
             this.btn_DownoladVideo.Size = new System.Drawing.Size(151, 45);
             this.btn_DownoladVideo.TabIndex = 20;

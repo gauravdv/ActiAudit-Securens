@@ -387,22 +387,16 @@
     <None Include="Resources\Download_30_Org.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Backward-30-Gry.png" />
+    <None Include="Resources\Backward-20-Gry1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Backward-30-Org.png" />
+    <None Include="Resources\Backward-20-Org1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Backward-20-Gry.png" />
+    <None Include="Resources\Forward-20-Gry1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Backward-20-Org.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Forward-20-Gry.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Forward-20-Org.png" />
+    <None Include="Resources\Forward-20-Org1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\0.5x_30_gry.png" />

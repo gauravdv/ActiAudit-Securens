@@ -20,6 +20,8 @@ namespace ImageScroller
 {
     public partial class frm_SaveChannel : Form
     {
+        public static int count_VideoDownload = 0;
+        public static String DownloadBtn_Click;
         cls_dbConnection cls_dbConnection = new cls_dbConnection();
         cls_CompIp cls_CompIp = new cls_CompIp(); // class file declare for using function
 
@@ -489,13 +491,13 @@ namespace ImageScroller
                     string VideoFileName = System.IO.Path.GetFileNameWithoutExtension(FileName);
 
                     string cSnapshotFolder_path = vfolder_path + "\\" + cp_ID + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path    
-                    //string cSnapshotFolder_path_2 = vfolder_path + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path // Video Path  
+                    //string cSnapshotFolder_path_2 = vfolder_path + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path   
                     string cSnapshotFolder_path_2 = "C:\\Securens" + "\\" + cp_ID + "-" + cp_Name + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path // Securens Folder
                     //string cSnapshotFolder_path = vfolder_path + "\\" + cp_ID + "_" + _ProjectName + "\\" + "System_SnapShot" + "\\" + VideoFileName; // create folder path                
                     System.IO.Directory.CreateDirectory(cSnapshotFolder_path_2); // create folder
 
                     string tempFilename = Path.ChangeExtension(Path.GetTempFileName(), ".bat"); // create bat file
-                    string vp_Path = TextBoxArry[i].Text; // save for video path
+                    string vp_Path = TextBoxArry[i].Text;
                     string Vp_path_2 = "\"" + vp_Path + "\"";
 
                     Get_ChannelNo(out db_ChannelName, out db_ProjectID, ref _ChannelName);
@@ -1025,12 +1027,12 @@ namespace ImageScroller
             channel9_txt.Text = "";
         }
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
-      
+
 
         #region Load, Click
         // Form Load
         private void frm_SaveChannel_Load(object sender, EventArgs e)
-        {         
+        {            
             Add_ListProjectName();
             Get_CmbTagType();
             //button1.Hide();
@@ -1374,8 +1376,10 @@ namespace ImageScroller
             else
             {
                 Btn_name = ((PictureBox)sender).Name;
-                frm_DownloadCVR CVR_Download = new frm_DownloadCVR(this);
+                DownloadBtn_Click = Btn_name;
+                frm_DownloadCVR CVR_Download = new frm_DownloadCVR(this);               
                 CVR_Download.Show();
+                count_VideoDownload++;
             }
         }
 
@@ -1396,30 +1400,29 @@ namespace ImageScroller
             TextBoxArry[8] = channel9_txt;
 
             // Download btn bo0x array  
-            PictureBox[] pictureBoxArry = new PictureBox[9];
-            pictureBoxArry[0] = PB1_Download;
-            pictureBoxArry[1] = PB2_Download;
-            pictureBoxArry[2] = PB3_Download;
-            pictureBoxArry[3] = PB4_Download;
-            pictureBoxArry[4] = PB5_Download;
-            pictureBoxArry[5] = PB6_Download;
-            pictureBoxArry[6] = PB7_Download;
-            pictureBoxArry[7] = PB8_Download;
-            pictureBoxArry[8] = PB9_Download;
-
+            PictureBox[] pictureBoxCVR = new PictureBox[9];
+            pictureBoxCVR[0] = PB1_Download;
+            pictureBoxCVR[1] = PB2_Download;
+            pictureBoxCVR[2] = PB3_Download;
+            pictureBoxCVR[3] = PB4_Download;
+            pictureBoxCVR[4] = PB5_Download;
+            pictureBoxCVR[5] = PB6_Download;
+            pictureBoxCVR[6] = PB7_Download;
+            pictureBoxCVR[7] = PB8_Download;
+            pictureBoxCVR[8] = PB9_Download;
+            
             for (int i = 0; i < 9; i++)
             {
                 // Insert Channel To db
-                if (pictureBoxArry[i].Name == Btn_name)
+                if (pictureBoxCVR[i].Name == Btn_name)
                 {
                     string path = Download_Path;
+                    //TextBoxArry[i].Text = path;
                     SetControlPropertyThreadSafe(TextBoxArry[i], "Text", path);
-                   // TextBoxArry[i].Text = path;
                 }
             }
         }
-
-        private delegate void SetControlPropertyThreadSafeDelegate(Control control, string propertyName, object propertyValue);
+        private delegate void SetControlPropertyThreadSafeDelegate(Control control, string propertyName,  object propertyValue);
         public static void SetControlPropertyThreadSafe(Control control, string propertyName, object propertyValue)
         {
             if (control.InvokeRequired)
@@ -1438,19 +1441,45 @@ namespace ImageScroller
                     new object[] { propertyValue });
             }
         }
-
-        public void get_Percentage(int DownloadPer)
+        
+        public void get_Percentage(string _Percentage)//, int ThreadCount)
         {
-            ABC = DownloadPer;
-            Thread th = new Thread(loading);
-            th.Start();
-          
-            //lab_per1.Text = DownloadPer.ToString();
-            //progressBar1.Value = DownloadPer;
-            //Int32.TryParse(_Percentage, out DownloadPer);
-            //Thread th = new Thread(loading);
-            //th.Start();
-            ////progressBar1.Value = x;
+            var myList = new List<string>(_Percentage.Split('|'));
+            string str_Pre = myList[0]; //+ "%";
+            string str_DownBtn = myList[1];
+
+            switch (str_DownBtn)
+            {                
+                case "PB1_Download":
+                    SetControlPropertyThreadSafe(lab_per1, "Text", str_Pre);                 
+                    break;
+                case "PB2_Download":
+                    SetControlPropertyThreadSafe(lab_per2, "Text", str_Pre);
+                    break;
+                case "PB3_Download":
+                    SetControlPropertyThreadSafe(lab_per3, "Text", str_Pre);
+                    break;
+                case "PB4_Download":
+                    SetControlPropertyThreadSafe(lab_per4, "Text", str_Pre);
+                    break;
+                case "PB5_Download":
+                    SetControlPropertyThreadSafe(lab_per5, "Text", str_Pre);
+                    break;
+                case "PB6_Download":
+                    SetControlPropertyThreadSafe(lab_per6, "Text", str_Pre);
+                    break;
+                case "PB7_Download":
+                    SetControlPropertyThreadSafe(lab_per7, "Text", str_Pre);
+                    break;
+                case "PB8_Download":
+                    SetControlPropertyThreadSafe(lab_per8, "Text", str_Pre);
+                    break;
+                case "PB9_Download":
+                    SetControlPropertyThreadSafe(lab_per9, "Text", str_Pre);
+                    break;
+                default:
+                    break;
+            }         
         }
 
         public void loading()
@@ -1856,10 +1885,14 @@ namespace ImageScroller
                     break;
             }
         }
+
+
         #endregion------------------------------------------------------------------------------------------------------------------
-          
-              
-        
+
+        private void lab_per8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

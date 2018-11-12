@@ -14,5 +14,5 @@ namespace ImageScroller
 		public bool isSelected { get; set; }
         public bool cs_isSelected { get; set; }
         public String VideoName { get; set; }
-    }	
+    }    
 }

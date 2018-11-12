@@ -76,13 +76,12 @@ namespace ImageScroller
         Bitmap AuditOrgImg = Properties.Resources.audit_30_orange;
         Bitmap ContinueGryImg = Properties.Resources.Continue_30_grey;// Continue Audit
         Bitmap ContinueOrgImg = Properties.Resources.Continue_30_orange;
+        Bitmap Spinner_org_148px = Properties.Resources.Spinner_Org_148px;// spinner
 
         Bitmap BackwordOrgIamg = Properties.Resources.Backward_20_Org;
         Bitmap BackwordGryIamg = Properties.Resources.Backward_20_Gry;
         Bitmap ForwordOrgIamg = Properties.Resources.Forward_20_Org;
         Bitmap ForwordGryIamg = Properties.Resources.Forward_20_Gry;
-
-        Bitmap Spinner_org_148px = Properties.Resources.Spinner_Org_148px;// spinner
 
         Bitmap x1GryImg = Properties.Resources._1x_30_gry;// forwaord backword play
         Bitmap X1OrgImg = Properties.Resources._1x_30_org;
@@ -283,7 +282,7 @@ namespace ImageScroller
                 fileFormatType = PChannelReder.GetString("img_Format"); // image format file
                 fileNameExtension = PChannelReder.GetString("file_Type"); // file type
                 String Path_video = PChannelReder.GetString("path_Video"); // video path where we select
-                //Path_SaveSnapShot = Path_video + "\\" + cp_ID +"-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path // video path
+                //Path_SaveSnapShot = Path_video + "\\" + cp_ID +"-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path
                 Path_SaveSnapShot = "C:\\Securens" + "\\" + cp_ID + "-" + cp_proName + "\\" + "User_SnapShot"; // save snapshot path // Securens path
                 string Path_User_SnapShot = Path_SaveSnapShot + "\\" + Channel_name; // 
                 db_VideoPath = Path_video;
@@ -296,7 +295,6 @@ namespace ImageScroller
                     
       
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
         //Save Snap Shot
@@ -395,7 +393,7 @@ namespace ImageScroller
                         String Path_video = PChannelReder.GetString("path_Video"); // video path where we select
 
                         // Path_SaveSnapShot = Path_video + "\\" + CurrProjectName_label.Text + "\\" + cf_UserS; // save snapshot path
-                        Path_SaveSnapShot = Path_video + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path // Video path
+                        Path_SaveSnapShot = Path_video + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path
                         Path_SaveSnapShot = "C:\\Securens" + "\\" + cp_ID + "-" + cp_proName + "\\" + cf_UserS; // save snapshot path // Securens path
                     }
                     PChannelReder.Close();
@@ -1733,7 +1731,7 @@ namespace ImageScroller
                     if (Fplay == 32)
                     {
                         Fplay = -2;
-                        playTimer.Interval = 1500;                       
+                        playTimer.Interval = 1500;
                     }
                     else if (Fplay == -2)
                     {
@@ -1756,7 +1754,7 @@ namespace ImageScroller
                     if (Fplay == 1)
                     {
                         Fplay = -1;
-                        playTimer.Interval = 1250;                       
+                        playTimer.Interval = 1250;
                     }
                     else if (Fplay == -1)
                     {
@@ -2014,6 +2012,12 @@ namespace ImageScroller
         {
             //loadChannels(); // Load Channels
         }
+
+
+
+
+
+
         #endregion-----------------------------------------------------------------------------------------------------------------------------------------------------------
        
     }

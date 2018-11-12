@@ -4,12 +4,12 @@ using System.IO;
 
 namespace ImageScroller
 {
-	public class FileOperation
-	{
+    public class FileOperation
+    {
         string String_Iamges;
-        
+
         public String saveFile(Dictionary<int, ChannelInfo> channelSet, String currentImageFilename, String destinationBasePath, String TagType, String TagReason, out string String_Iamges, out string saveSuccess, out string destinationPath)
-		{
+        {
             saveSuccess = "false";
             String_Iamges = string.Empty;
             destinationPath = string.Empty;
@@ -40,7 +40,7 @@ namespace ImageScroller
                                 destinationBasePath = destinationBasePath + "\\";
                             }
                             string _Tag_Reason = TagReason.Replace(" ", "_");
-                            string Tag_Reason2 = TagReason; 
+                            string Tag_Reason2 = TagReason;
                             String TagReasonPath = destinationBasePath + Tag_Reason2;
                             if (!Directory.Exists(TagReasonPath))
                             {
@@ -97,16 +97,16 @@ namespace ImageScroller
 
                                 //String_Iamges = S2CIFN + ";" + S1CIFN + ";" + CIFN + ";" + A1CIFN + ";" + A2CIFN;
                                 String_Iamges = CIFN;
-                             saveSuccess = "true";                                
+                                saveSuccess = "true";
                             }
                             else
                             {
                                 saveSuccess = "false";
                                 break;
                             }
-                        }                        
+                        }
                     }
-                }                
+                }
             }
             catch (Exception e)
             {

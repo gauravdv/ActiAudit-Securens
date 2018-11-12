@@ -940,10 +940,10 @@
             // 
             this.PB_ForWord1.Image = global::ImageScroller.Properties.Resources.Forward_20_Gry;
             this.PB_ForWord1.InitialImage = null;
-            this.PB_ForWord1.Location = new System.Drawing.Point(171, 54);
+            this.PB_ForWord1.Location = new System.Drawing.Point(171, 52);
             this.PB_ForWord1.Name = "PB_ForWord1";
             this.PB_ForWord1.Size = new System.Drawing.Size(32, 33);
-            this.PB_ForWord1.TabIndex = 916;
+            this.PB_ForWord1.TabIndex = 915;
             this.PB_ForWord1.TabStop = false;
             this.PB_ForWord1.Click += new System.EventHandler(this.PB_X_Click);
             this.PB_ForWord1.MouseEnter += new System.EventHandler(this.PictureBox_MouseEnter);
@@ -954,10 +954,10 @@
             // 
             this.PB_BackWord1.Image = global::ImageScroller.Properties.Resources.Backward_20_Gry;
             this.PB_BackWord1.InitialImage = null;
-            this.PB_BackWord1.Location = new System.Drawing.Point(109, 54);
+            this.PB_BackWord1.Location = new System.Drawing.Point(109, 52);
             this.PB_BackWord1.Name = "PB_BackWord1";
             this.PB_BackWord1.Size = new System.Drawing.Size(32, 33);
-            this.PB_BackWord1.TabIndex = 915;
+            this.PB_BackWord1.TabIndex = 914;
             this.PB_BackWord1.TabStop = false;
             this.PB_BackWord1.Click += new System.EventHandler(this.PB_X_Click);
             this.PB_BackWord1.MouseEnter += new System.EventHandler(this.PictureBox_MouseEnter);
@@ -967,7 +967,7 @@
             // PB_File
             // 
             this.PB_File.Image = ((System.Drawing.Image)(resources.GetObject("PB_File.Image")));
-            this.PB_File.Location = new System.Drawing.Point(297, 54);
+            this.PB_File.Location = new System.Drawing.Point(297, 52);
             this.PB_File.Name = "PB_File";
             this.PB_File.Size = new System.Drawing.Size(32, 33);
             this.PB_File.TabIndex = 912;
@@ -980,7 +980,7 @@
             // PB_CompAuditing
             // 
             this.PB_CompAuditing.Image = ((System.Drawing.Image)(resources.GetObject("PB_CompAuditing.Image")));
-            this.PB_CompAuditing.Location = new System.Drawing.Point(255, 54);
+            this.PB_CompAuditing.Location = new System.Drawing.Point(255, 52);
             this.PB_CompAuditing.Name = "PB_CompAuditing";
             this.PB_CompAuditing.Size = new System.Drawing.Size(32, 33);
             this.PB_CompAuditing.TabIndex = 911;
@@ -993,7 +993,7 @@
             // PB_Continue
             // 
             this.PB_Continue.Image = ((System.Drawing.Image)(resources.GetObject("PB_Continue.Image")));
-            this.PB_Continue.Location = new System.Drawing.Point(213, 54);
+            this.PB_Continue.Location = new System.Drawing.Point(213, 52);
             this.PB_Continue.Name = "PB_Continue";
             this.PB_Continue.Size = new System.Drawing.Size(32, 33);
             this.PB_Continue.TabIndex = 910;
@@ -1006,7 +1006,7 @@
             // PB_X
             // 
             this.PB_X.InitialImage = null;
-            this.PB_X.Location = new System.Drawing.Point(140, 54);
+            this.PB_X.Location = new System.Drawing.Point(140, 52);
             this.PB_X.Name = "PB_X";
             this.PB_X.Size = new System.Drawing.Size(32, 33);
             this.PB_X.TabIndex = 909;
@@ -1020,7 +1020,7 @@
             // 
             this.PB_Stop.Image = ((System.Drawing.Image)(resources.GetObject("PB_Stop.Image")));
             this.PB_Stop.InitialImage = null;
-            this.PB_Stop.Location = new System.Drawing.Point(66, 54);
+            this.PB_Stop.Location = new System.Drawing.Point(66, 52);
             this.PB_Stop.Name = "PB_Stop";
             this.PB_Stop.Size = new System.Drawing.Size(32, 33);
             this.PB_Stop.TabIndex = 908;
@@ -1032,7 +1032,7 @@
             // 
             // PB_play
             // 
-            this.PB_play.Location = new System.Drawing.Point(25, 54);
+            this.PB_play.Location = new System.Drawing.Point(25, 52);
             this.PB_play.Name = "PB_play";
             this.PB_play.Size = new System.Drawing.Size(32, 33);
             this.PB_play.TabIndex = 907;

@@ -19,10 +19,16 @@ namespace ImageScroller
 {
     public partial class frm_DownloadCVR : Form
     {
-        int Last_Percentage;
-        Thread T;
-        string str_uiRecHandle;
-     
+        string[] arry_BtnClick = new string[10];
+        int[] _n = new int[10];
+        int[] m = new int[10];
+        string uihandle;
+        int count = frm_SaveChannel.count_VideoDownload;  // Count Click
+        string DownloadBtn_Click = frm_SaveChannel.DownloadBtn_Click;  // Which Btn click
+
+        Thread[] T = new Thread[10];
+        int ThreadCount;
+    
         cls_CompIp cls_CompIp = new cls_CompIp(); // class file declare for using function
         int DownloadPer = 0;
 
@@ -44,14 +50,15 @@ namespace ImageScroller
 
         public static string Download_Path;
         public static string _Percentage;
-        
+        public static string _Percentage2;
+        public static string ret_btnClick;
 
         public frm_DownloadCVR(frm_SaveChannel frm_SaveChannel)
         {
             InitializeComponent();
             _frm_SaveChannel = frm_SaveChannel;
-        }    
-
+        }       
+      
         private void frm_DownloadCVR_Load(object sender, EventArgs e)
         {          
             try
@@ -67,10 +74,13 @@ namespace ImageScroller
 
                 cls_CompIp.Get_ipAddress(out string MyComp_Ip); // Computer Ip address
                 clientSocket.Connect(MyComp_Ip, 9001); // connection to socket clientSocket.Connect("192.168.1.52", 9001);
-           
+
+                //AsynchronousClient.StartClient();
+
                 if (clientSocket.Connected)
                 {
                     msg("Client Started");
+                    //label1.Text = "Client Socket Program - Server Connected ...";
                     _isConnected = true;
                 }
                 else
@@ -81,9 +91,7 @@ namespace ImageScroller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Connection Errors");
-                this.Close();
-                //MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
+                MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
             }            
            
         }      
@@ -94,12 +102,15 @@ namespace ImageScroller
         }
 
         // string for Download video
-        public void S_Download()
+        public void S_Download(int ThreadCount)
         {
             try
             {
                 string _Code = "DV";
-                //DV | 10.0.0.225 | 80 | admin | Securens$#2018|0|61618|KITCHEN|1535445000|1535448599|Client_1|BQ002
+                ThreadCount = count;
+                int threadID = (int)AppDomain.GetCurrentThreadId();
+                int managedThreadId = Thread.CurrentThread.ManagedThreadId;
+
                 DateTime time = DateTime.Now;
                 long _CuurentTime = (time.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
                 string _CameraName = txt_CameraName.Text;
@@ -114,6 +125,7 @@ namespace ImageScroller
 
                 if (_sTimeStamp < _eTimeStamp && _CuurentTime > _eTimeStamp)
                 {
+                    //DV | 10.0.0.225 | 80 | admin | Securens$#2018|0|61618|KITCHEN|1535445000|1535448599|Client_1|BQ002
                     D_String = _Code + "|" + _Ip + "|" + _Port + "|" + _UserName + "|" + _Password + "|" + _LoginType + "|" +
                           iMqPort + "|" + _CameraName + "|" + _sTimeStamp + "|" + _eTimeStamp + "|" + _ClientName + "|" +
                           _DeviceName;
@@ -127,11 +139,10 @@ namespace ImageScroller
                     byte[] inStream = new byte[10025];
 
                     int bytesRead = serverStream.Read(inStream, 0, inStream.Length);
-                    //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+                    //serverStream.Read(inStream, 0, clientSocket.ReceiveBufferSize);
                     string returndata = Encoding.ASCII.GetString(inStream, 0, bytesRead);
-                    // string returndata = System.Text.Encoding.ASCII.GetString(inStream);
                     returndata = returndata.Trim('\0');
-                    
+
                     switch (returndata)
                     {
                         case "":
@@ -163,39 +174,28 @@ namespace ImageScroller
                             });
                             break;
                         default:
-                            string lab_msg = "Download Progress please Wait..... " + 0 + " % ";
-                            SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                            //lab_Progress.Enabled = true;
                             Download_Path = returndata;
-
                             var myList = new List<string>(Download_Path.Split('|'));
-                            str_uiRecHandle = myList[0];
+                            string str_uiRecHandle = myList[0];
                             string str_DownloadPath = myList[1]; //Download_Path.Substring(8, Download_Path.Length - 8);
-                            msg(str_DownloadPath);
-                            _frm_SaveChannel.get_Path(str_DownloadPath);
-                            S_Percentage();
+                                                                 //msg(str_DownloadPath);
+
+                            arry_BtnClick[ThreadCount] = DownloadBtn_Click;
+                            _n[ThreadCount] = threadID;
+                            m[ThreadCount] = Int32.Parse(str_uiRecHandle);
+
+                            this.Invoke((MethodInvoker)delegate  // close the form on the forms thread
+                            {
+                                this.Close();
+                                _frm_SaveChannel.get_Path(str_DownloadPath);
+                            });
+
+                            S_Percentage(Int32.Parse(str_uiRecHandle));
                             break;
                     }
-
-                   
-                    //else
-                    //{
-                    //    string lab_msg = "Download Progress please Wait..... " + 0 + " % ";
-                    //    SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                    //    //lab_Progress.Enabled = true;
-                    //    Download_Path = returndata;
-
-                    //    var myList = new List<string>(Download_Path.Split('|'));
-                    //    str_uiRecHandle = myList[0];
-                    //    string str_DownloadPath = myList[1]; //Download_Path.Substring(8, Download_Path.Length - 8);
-                    //    msg(str_DownloadPath);
-                    //    _frm_SaveChannel.get_Path(str_DownloadPath);
-                    //    S_Percentage();
-                    //}
                 }
                 else
                 {
-                    //lab_Progress.Enabled = false;
                     MessageBox.Show("Enter the valid Date & Time");
                     this.Invoke((MethodInvoker)delegate  // close the form on the forms thread
                     {
@@ -203,128 +203,156 @@ namespace ImageScroller
                     });
                 }
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show("Connection Errors");
-                this.Invoke((MethodInvoker)delegate  // close the form on the forms thread
-                {                    
-                    this.Cursor = Cursors.Default; // Waiting / hour glass 
-                    this.Close();
-                });
-               
-                //MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
-            }
+                //MessageBox.Show("Connection Errors");
+                MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
+            }                     
         }            
 
         // string for percentage of video download
-        public void S_Percentage()
+        public void S_Percentage(int str_uiRecHandle)
         {
             try
             {
-                //Thread Per = new Thread(S_Percentage);
                 string _Code = "CV";
+                int threadID = (int)AppDomain.GetCurrentThreadId();
+                int managedThreadId = Thread.CurrentThread.ManagedThreadId;
+
                 P_String = _Code + "|" + _Ip + "|" + _Port + "|" + _UserName + "|" + _Password + "|" + _LoginType + "|" +
-                          iMqPort + "|" + str_uiRecHandle; ; // + "|"  + _ClientName;
-                
-                if (clientSocket.Connected)
+                          iMqPort + "|" + str_uiRecHandle; // + "|"  + _ClientName;
+
+                NetworkStream serverStream = clientSocket.GetStream();
+                // byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textBox2.Text + "$");
+                byte[] outStream = System.Text.Encoding.ASCII.GetBytes(P_String);
+                serverStream.Write(outStream, 0, outStream.Length);
+                serverStream.Flush();
+                byte[] inStream = new byte[10025];
+
+                int bytesRead = serverStream.Read(inStream, 0, inStream.Length);
+                // serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+                string returndata = Encoding.ASCII.GetString(inStream, 0, bytesRead);
+                string str_ReturnData = returndata.Trim('\0');
+                var myreturndata = new List<string>(str_ReturnData.Split('|'));
+                string str_Ui = myreturndata[0];
+                string str_Per = myreturndata[1];
+
+                if (str_Per != "100")
                 {
-                    NetworkStream serverStream = clientSocket.GetStream();
-                    // byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textBox2.Text + "$");
-                    byte[] outStream = System.Text.Encoding.ASCII.GetBytes(P_String);
-                    serverStream.Write(outStream, 0, outStream.Length);
-
-                    serverStream.Flush();
-                    byte[] inStream = new byte[10025];
-
-                    int bytesRead = serverStream.Read(inStream, 0, inStream.Length);
-                    //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
-                    string returndata = System.Text.Encoding.ASCII.GetString(inStream, 0, bytesRead);
-                    string str_ReturnData = returndata.Trim('\0');
-                  
-                    string lab_msg;
-                    //if (Last_Percentage != Int32.Parse(returndata))
-                    //{
-                        switch (returndata)
-                        {
-                            case "Erroer in Video Download":
-                                lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                                SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                                break;
-                            default:
-                                if (str_ReturnData != "100")
-                                {
-                                    lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                                    SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                                    _Percentage = returndata;
-                                    Int32.TryParse(_Percentage, out DownloadPer);
-                                    Last_Percentage = Int32.Parse(returndata) ;
-                                    S_Percentage();
-                                }
-                                else
-                                {
-                                    lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                                    SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                                    this.Invoke((MethodInvoker)delegate  // close the form on the forms thread
-                                    {
-                                        this.Close();
-                                    });
-                                }
-                                break;
-                        }
-
-                        //if ("Erroer in Video Download" == str_ReturnData)
-                        //{
-                        //    string lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                        //    SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                        //}
-                        //else
-                        //{
-                        //    if (str_ReturnData != "100")
-                        //    {
-                        //        string lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                        //        SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                        //        _Percentage = returndata;
-                        //        Int32.TryParse(_Percentage, out DownloadPer);
-                        //        S_Percentage();
-                        //    }
-                        //    else
-                        //    {
-                        //        string lab_msg = "Download Progress please Wait..... " + str_ReturnData + " % ";
-                        //        SetControlPropertyThreadSafe(label1, "Text", lab_msg);
-                        //        this.Invoke((MethodInvoker)delegate  // close the form on the forms thread
-                        //        {
-                        //            this.Close();
-                        //        });
-                        //    }
-
-                        //}
-
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show("Error in video download try again.........");
-                    //}
+                    _Percentage = str_Per;
+                    Int32.TryParse(_Percentage, out DownloadPer);
+                    _Percentage2 = _Percentage + "|" + DownloadBtn_Click;
+                    _frm_SaveChannel.get_Percentage(_Percentage2);
+                    S2_Percentage();
                 }
                 else
                 {
-                    MessageBox.Show("Client Can't Start the socket Connection");
+                    _Percentage2 = str_Per + "|" + DownloadBtn_Click;
+                    _frm_SaveChannel.get_Percentage(_Percentage2);
+                    //Thread.CurrentThread.Abort();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Connection Errors");
-                this.Close();
-                //MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
+                //MessageBox.Show("Connection Errors");
+                MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
             }
         }
-      
+
+        public void S2_Percentage()
+        {
+            try
+            {
+                string _Code = "CV";
+                int threadID = (int)AppDomain.GetCurrentThreadId();
+                int managedThreadId = Thread.CurrentThread.ManagedThreadId;
+
+                int counts = 0;
+                foreach (int i in _n ?? Enumerable.Empty<int>())
+                {
+                    int _threadId = i;
+                    if (threadID == _threadId)
+                    {
+                        uihandle = m[counts].ToString();
+                        ret_btnClick = arry_BtnClick[count];
+                        break;
+                    }
+                    counts++;
+                }
+
+                P_String = _Code + "|" + _Ip + "|" + _Port + "|" + _UserName + "|" + _Password + "|" + _LoginType + "|" +
+                          iMqPort + "|" + uihandle; // + "|"  + _ClientName;
+
+                NetworkStream serverStream = clientSocket.GetStream();
+                // byte[] outStream = System.Text.Encoding.ASCII.GetBytes(textBox2.Text + "$");
+                byte[] outStream = System.Text.Encoding.ASCII.GetBytes(P_String);
+                serverStream.Write(outStream, 0, outStream.Length);
+
+                serverStream.Flush();
+                byte[] inStream = new byte[10025];
+
+                int bytesRead = serverStream.Read(inStream, 0, inStream.Length);
+                //serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+                string returndata = Encoding.ASCII.GetString(inStream, 0, bytesRead);
+                string str_ReturnData = returndata.Trim('\0');
+                var myreturndata = new List<string>(str_ReturnData.Split('|'));
+                string str_Ui = myreturndata[0];
+                string str_Per = myreturndata[1];
+
+
+                if (str_Per != "100")
+                {
+                    int j = 0;
+                    foreach (int i in m ?? Enumerable.Empty<int>())
+                    {
+                        int _UiId = i;
+                        if (Int32.Parse(str_Ui) == _UiId)
+                        {
+                            ret_btnClick = arry_BtnClick[count];
+                            break;
+                        }
+                        j++;
+                    }
+                    _Percentage = "";
+                    _Percentage = returndata;
+                    Int32.TryParse(_Percentage, out DownloadPer);
+                    _Percentage2 = str_Per + "|" + ret_btnClick;
+
+                    _frm_SaveChannel.get_Percentage(_Percentage2);
+                    S2_Percentage();
+                }
+                else
+                {
+                    int k = 0;
+                    foreach (int i in m ?? Enumerable.Empty<int>())
+                    {
+                        int _UiId = i;
+                        if (Int32.Parse(str_Ui) == _UiId)
+                        {
+                            ret_btnClick = arry_BtnClick[count];
+                            break;
+                        }
+                        k++;
+                    }
+                    _Percentage2 = str_Per + "|" + ret_btnClick;
+                    _frm_SaveChannel.get_Percentage(_Percentage2);
+                    //Thread.CurrentThread.Abort();
+                }
+            }
+            catch (Exception ex)
+            {
+               //MessageBox.Show("Connection Errors");
+               MessageBox.Show("Client Can't Start the socket Connection, Global exception: {0}", ex.Message);
+            }
+           
+        }
+       
         //btn Download Video
         private void btn_DownoladVideo_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor; // Waiting / hour glass 
-            T = new Thread(S_Download);
-            T.Start();
+            T[ThreadCount] = new Thread(() => S_Download(ThreadCount));
+            T[ThreadCount].Start();
         }
 
         // btn close
@@ -341,26 +369,6 @@ namespace ImageScroller
         {
             lab_Close.ForeColor = System.Drawing.Color.WhiteSmoke;
             lab_Close.BackColor = System.Drawing.ColorTranslator.FromHtml("#f26222");
-        }
-
-        private delegate void SetControlPropertyThreadSafeDelegate(Control control, string propertyName, object propertyValue);
-        public static void SetControlPropertyThreadSafe(Control control, string propertyName, object propertyValue)
-        {
-            if (control.InvokeRequired)
-            {
-                control.Invoke(new SetControlPropertyThreadSafeDelegate
-                (SetControlPropertyThreadSafe),
-                new object[] { control, propertyName, propertyValue });
-            }
-            else
-            {
-                control.GetType().InvokeMember(
-                    propertyName,
-                    BindingFlags.SetProperty,
-                    null,
-                    control,
-                    new object[] { propertyValue });
-            }
         }
 
     }

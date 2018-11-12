@@ -48,6 +48,8 @@
             this.cmb_TagMaster = new System.Windows.Forms.ComboBox();
             this.lab_ProjectID = new System.Windows.Forms.Label();
             this.txt_Newproject = new System.Windows.Forms.TextBox();
+            this.lab_per2 = new System.Windows.Forms.Label();
+            this.lab_per1 = new System.Windows.Forms.Label();
             this.mv_Channel = new System.Windows.Forms.Label();
             this.panel13 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -95,6 +97,13 @@
             this.lab_SelectProjectName = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lab_per9 = new System.Windows.Forms.Label();
+            this.lab_per8 = new System.Windows.Forms.Label();
+            this.lab_per7 = new System.Windows.Forms.Label();
+            this.lab_per6 = new System.Windows.Forms.Label();
+            this.lab_per5 = new System.Windows.Forms.Label();
+            this.lab_per4 = new System.Windows.Forms.Label();
+            this.lab_per3 = new System.Windows.Forms.Label();
             this.PB9_Download = new System.Windows.Forms.PictureBox();
             this.PB8_Download = new System.Windows.Forms.PictureBox();
             this.PB7_Download = new System.Windows.Forms.PictureBox();
@@ -424,6 +433,24 @@
             this.txt_Newproject.Size = new System.Drawing.Size(235, 23);
             this.txt_Newproject.TabIndex = 0;
             this.txt_Newproject.Tag = "";
+            // 
+            // lab_per2
+            // 
+            this.lab_per2.AutoSize = true;
+            this.lab_per2.Location = new System.Drawing.Point(632, 67);
+            this.lab_per2.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per2.Name = "lab_per2";
+            this.lab_per2.Size = new System.Drawing.Size(0, 17);
+            this.lab_per2.TabIndex = 919;
+            // 
+            // lab_per1
+            // 
+            this.lab_per1.AutoSize = true;
+            this.lab_per1.Location = new System.Drawing.Point(632, 15);
+            this.lab_per1.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per1.Name = "lab_per1";
+            this.lab_per1.Size = new System.Drawing.Size(0, 17);
+            this.lab_per1.TabIndex = 918;
             // 
             // mv_Channel
             // 
@@ -993,12 +1020,21 @@
             // 
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnCount = 6;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.38957F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.33496F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.27547F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
+            this.tableLayoutPanel1.Controls.Add(this.lab_per9, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per8, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per7, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per6, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per5, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per4, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per3, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per2, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.PB9_Download, 3, 8);
             this.tableLayoutPanel1.Controls.Add(this.PB8_Download, 3, 7);
             this.tableLayoutPanel1.Controls.Add(this.PB7_Download, 3, 6);
@@ -1044,6 +1080,7 @@
             this.tableLayoutPanel1.Controls.Add(this.Browse_PB6, 2, 5);
             this.tableLayoutPanel1.Controls.Add(this.PB_Check2, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.PB1_Download, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lab_per1, 5, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 34);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 9;
@@ -1059,10 +1096,74 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(692, 474);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // lab_per9
+            // 
+            this.lab_per9.AutoSize = true;
+            this.lab_per9.Location = new System.Drawing.Point(632, 431);
+            this.lab_per9.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per9.Name = "lab_per9";
+            this.lab_per9.Size = new System.Drawing.Size(0, 17);
+            this.lab_per9.TabIndex = 947;
+            // 
+            // lab_per8
+            // 
+            this.lab_per8.AutoSize = true;
+            this.lab_per8.Location = new System.Drawing.Point(632, 381);
+            this.lab_per8.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per8.Name = "lab_per8";
+            this.lab_per8.Size = new System.Drawing.Size(0, 17);
+            this.lab_per8.TabIndex = 946;
+            this.lab_per8.Click += new System.EventHandler(this.lab_per8_Click);
+            // 
+            // lab_per7
+            // 
+            this.lab_per7.AutoSize = true;
+            this.lab_per7.Location = new System.Drawing.Point(632, 329);
+            this.lab_per7.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per7.Name = "lab_per7";
+            this.lab_per7.Size = new System.Drawing.Size(0, 17);
+            this.lab_per7.TabIndex = 945;
+            // 
+            // lab_per6
+            // 
+            this.lab_per6.AutoSize = true;
+            this.lab_per6.Location = new System.Drawing.Point(632, 279);
+            this.lab_per6.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per6.Name = "lab_per6";
+            this.lab_per6.Size = new System.Drawing.Size(0, 17);
+            this.lab_per6.TabIndex = 944;
+            // 
+            // lab_per5
+            // 
+            this.lab_per5.AutoSize = true;
+            this.lab_per5.Location = new System.Drawing.Point(632, 227);
+            this.lab_per5.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per5.Name = "lab_per5";
+            this.lab_per5.Size = new System.Drawing.Size(0, 17);
+            this.lab_per5.TabIndex = 943;
+            // 
+            // lab_per4
+            // 
+            this.lab_per4.AutoSize = true;
+            this.lab_per4.Location = new System.Drawing.Point(632, 173);
+            this.lab_per4.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per4.Name = "lab_per4";
+            this.lab_per4.Size = new System.Drawing.Size(0, 17);
+            this.lab_per4.TabIndex = 942;
+            // 
+            // lab_per3
+            // 
+            this.lab_per3.AutoSize = true;
+            this.lab_per3.Location = new System.Drawing.Point(632, 119);
+            this.lab_per3.Margin = new System.Windows.Forms.Padding(10, 15, 3, 0);
+            this.lab_per3.Name = "lab_per3";
+            this.lab_per3.Size = new System.Drawing.Size(0, 17);
+            this.lab_per3.TabIndex = 941;
+            // 
             // PB9_Download
             // 
             this.PB9_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB9_Download.Location = new System.Drawing.Point(539, 426);
+            this.PB9_Download.Location = new System.Drawing.Point(515, 426);
             this.PB9_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB9_Download.Name = "PB9_Download";
             this.PB9_Download.Size = new System.Drawing.Size(30, 32);
@@ -1076,7 +1177,7 @@
             // PB8_Download
             // 
             this.PB8_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB8_Download.Location = new System.Drawing.Point(539, 376);
+            this.PB8_Download.Location = new System.Drawing.Point(515, 376);
             this.PB8_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB8_Download.Name = "PB8_Download";
             this.PB8_Download.Size = new System.Drawing.Size(30, 32);
@@ -1090,7 +1191,7 @@
             // PB7_Download
             // 
             this.PB7_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB7_Download.Location = new System.Drawing.Point(539, 324);
+            this.PB7_Download.Location = new System.Drawing.Point(515, 324);
             this.PB7_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB7_Download.Name = "PB7_Download";
             this.PB7_Download.Size = new System.Drawing.Size(30, 32);
@@ -1104,7 +1205,7 @@
             // PB6_Download
             // 
             this.PB6_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB6_Download.Location = new System.Drawing.Point(539, 274);
+            this.PB6_Download.Location = new System.Drawing.Point(515, 274);
             this.PB6_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB6_Download.Name = "PB6_Download";
             this.PB6_Download.Size = new System.Drawing.Size(30, 32);
@@ -1118,7 +1219,7 @@
             // PB5_Download
             // 
             this.PB5_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB5_Download.Location = new System.Drawing.Point(539, 222);
+            this.PB5_Download.Location = new System.Drawing.Point(515, 222);
             this.PB5_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB5_Download.Name = "PB5_Download";
             this.PB5_Download.Size = new System.Drawing.Size(30, 32);
@@ -1132,7 +1233,7 @@
             // PB4_Download
             // 
             this.PB4_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB4_Download.Location = new System.Drawing.Point(539, 168);
+            this.PB4_Download.Location = new System.Drawing.Point(515, 168);
             this.PB4_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB4_Download.Name = "PB4_Download";
             this.PB4_Download.Size = new System.Drawing.Size(30, 32);
@@ -1146,7 +1247,7 @@
             // PB3_Download
             // 
             this.PB3_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB3_Download.Location = new System.Drawing.Point(539, 114);
+            this.PB3_Download.Location = new System.Drawing.Point(515, 114);
             this.PB3_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB3_Download.Name = "PB3_Download";
             this.PB3_Download.Size = new System.Drawing.Size(30, 32);
@@ -1160,7 +1261,7 @@
             // PB2_Download
             // 
             this.PB2_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB2_Download.Location = new System.Drawing.Point(539, 62);
+            this.PB2_Download.Location = new System.Drawing.Point(515, 62);
             this.PB2_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB2_Download.Name = "PB2_Download";
             this.PB2_Download.Size = new System.Drawing.Size(30, 32);
@@ -1175,9 +1276,9 @@
             // 
             this.PB_Check1.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check1.Location = new System.Drawing.Point(590, 3);
+            this.PB_Check1.Location = new System.Drawing.Point(566, 3);
             this.PB_Check1.Name = "PB_Check1";
-            this.PB_Check1.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check1.Size = new System.Drawing.Size(53, 46);
             this.PB_Check1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check1.TabIndex = 917;
             this.PB_Check1.TabStop = false;
@@ -1185,7 +1286,7 @@
             // Browse_PB7
             // 
             this.Browse_PB7.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB7.Image")));
-            this.Browse_PB7.Location = new System.Drawing.Point(484, 324);
+            this.Browse_PB7.Location = new System.Drawing.Point(463, 324);
             this.Browse_PB7.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB7.Name = "Browse_PB7";
             this.Browse_PB7.Size = new System.Drawing.Size(30, 32);
@@ -1199,7 +1300,7 @@
             // Browse_PB5
             // 
             this.Browse_PB5.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB5.Image")));
-            this.Browse_PB5.Location = new System.Drawing.Point(484, 222);
+            this.Browse_PB5.Location = new System.Drawing.Point(463, 222);
             this.Browse_PB5.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB5.Name = "Browse_PB5";
             this.Browse_PB5.Size = new System.Drawing.Size(30, 32);
@@ -1213,7 +1314,7 @@
             // Browse_PB3
             // 
             this.Browse_PB3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Browse_PB3.BackgroundImage")));
-            this.Browse_PB3.Location = new System.Drawing.Point(484, 114);
+            this.Browse_PB3.Location = new System.Drawing.Point(463, 114);
             this.Browse_PB3.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB3.Name = "Browse_PB3";
             this.Browse_PB3.Size = new System.Drawing.Size(30, 32);
@@ -1227,7 +1328,7 @@
             // Browse_PB2
             // 
             this.Browse_PB2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Browse_PB2.BackgroundImage")));
-            this.Browse_PB2.Location = new System.Drawing.Point(484, 62);
+            this.Browse_PB2.Location = new System.Drawing.Point(463, 62);
             this.Browse_PB2.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB2.Name = "Browse_PB2";
             this.Browse_PB2.Size = new System.Drawing.Size(30, 32);
@@ -1241,7 +1342,7 @@
             // Browse_PB1
             // 
             this.Browse_PB1.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB1.Image")));
-            this.Browse_PB1.Location = new System.Drawing.Point(484, 10);
+            this.Browse_PB1.Location = new System.Drawing.Point(463, 10);
             this.Browse_PB1.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB1.Name = "Browse_PB1";
             this.Browse_PB1.Size = new System.Drawing.Size(30, 32);
@@ -1256,9 +1357,9 @@
             // 
             this.PB_Check9.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check9.Location = new System.Drawing.Point(590, 419);
+            this.PB_Check9.Location = new System.Drawing.Point(566, 419);
             this.PB_Check9.Name = "PB_Check9";
-            this.PB_Check9.Size = new System.Drawing.Size(54, 44);
+            this.PB_Check9.Size = new System.Drawing.Size(53, 44);
             this.PB_Check9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check9.TabIndex = 912;
             this.PB_Check9.TabStop = false;
@@ -1267,9 +1368,9 @@
             // 
             this.PB_Check8.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check8.Location = new System.Drawing.Point(590, 369);
+            this.PB_Check8.Location = new System.Drawing.Point(566, 369);
             this.PB_Check8.Name = "PB_Check8";
-            this.PB_Check8.Size = new System.Drawing.Size(54, 44);
+            this.PB_Check8.Size = new System.Drawing.Size(53, 44);
             this.PB_Check8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check8.TabIndex = 911;
             this.PB_Check8.TabStop = false;
@@ -1278,9 +1379,9 @@
             // 
             this.PB_Check7.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check7.Location = new System.Drawing.Point(590, 317);
+            this.PB_Check7.Location = new System.Drawing.Point(566, 317);
             this.PB_Check7.Name = "PB_Check7";
-            this.PB_Check7.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check7.Size = new System.Drawing.Size(53, 46);
             this.PB_Check7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check7.TabIndex = 911;
             this.PB_Check7.TabStop = false;
@@ -1289,9 +1390,9 @@
             // 
             this.PB_Check6.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check6.Location = new System.Drawing.Point(590, 267);
+            this.PB_Check6.Location = new System.Drawing.Point(566, 267);
             this.PB_Check6.Name = "PB_Check6";
-            this.PB_Check6.Size = new System.Drawing.Size(54, 44);
+            this.PB_Check6.Size = new System.Drawing.Size(53, 44);
             this.PB_Check6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check6.TabIndex = 911;
             this.PB_Check6.TabStop = false;
@@ -1300,9 +1401,9 @@
             // 
             this.PB_Check5.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check5.Location = new System.Drawing.Point(590, 215);
+            this.PB_Check5.Location = new System.Drawing.Point(566, 215);
             this.PB_Check5.Name = "PB_Check5";
-            this.PB_Check5.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check5.Size = new System.Drawing.Size(53, 46);
             this.PB_Check5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check5.TabIndex = 911;
             this.PB_Check5.TabStop = false;
@@ -1311,9 +1412,9 @@
             // 
             this.PB_Check4.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check4.Location = new System.Drawing.Point(590, 161);
+            this.PB_Check4.Location = new System.Drawing.Point(566, 161);
             this.PB_Check4.Name = "PB_Check4";
-            this.PB_Check4.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check4.Size = new System.Drawing.Size(53, 46);
             this.PB_Check4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check4.TabIndex = 911;
             this.PB_Check4.TabStop = false;
@@ -1322,9 +1423,9 @@
             // 
             this.PB_Check3.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check3.Location = new System.Drawing.Point(590, 107);
+            this.PB_Check3.Location = new System.Drawing.Point(566, 107);
             this.PB_Check3.Name = "PB_Check3";
-            this.PB_Check3.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check3.Size = new System.Drawing.Size(53, 46);
             this.PB_Check3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check3.TabIndex = 910;
             this.PB_Check3.TabStop = false;
@@ -1333,81 +1434,81 @@
             // 
             this.channel9_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel9_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel9_txt.Location = new System.Drawing.Point(121, 433);
+            this.channel9_txt.Location = new System.Drawing.Point(116, 433);
             this.channel9_txt.Name = "channel9_txt";
-            this.channel9_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel9_txt.Size = new System.Drawing.Size(319, 23);
             this.channel9_txt.TabIndex = 25;
             // 
             // channel8_txt
             // 
             this.channel8_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel8_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel8_txt.Location = new System.Drawing.Point(121, 379);
+            this.channel8_txt.Location = new System.Drawing.Point(116, 379);
             this.channel8_txt.Name = "channel8_txt";
-            this.channel8_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel8_txt.Size = new System.Drawing.Size(319, 23);
             this.channel8_txt.TabIndex = 22;
             // 
             // channel7_txt
             // 
             this.channel7_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel7_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel7_txt.Location = new System.Drawing.Point(121, 328);
+            this.channel7_txt.Location = new System.Drawing.Point(116, 328);
             this.channel7_txt.Name = "channel7_txt";
-            this.channel7_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel7_txt.Size = new System.Drawing.Size(319, 23);
             this.channel7_txt.TabIndex = 19;
             // 
             // channel6_txt
             // 
             this.channel6_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel6_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel6_txt.Location = new System.Drawing.Point(121, 277);
+            this.channel6_txt.Location = new System.Drawing.Point(116, 277);
             this.channel6_txt.Name = "channel6_txt";
-            this.channel6_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel6_txt.Size = new System.Drawing.Size(319, 23);
             this.channel6_txt.TabIndex = 16;
             // 
             // channel5_txt
             // 
             this.channel5_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel5_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel5_txt.Location = new System.Drawing.Point(121, 226);
+            this.channel5_txt.Location = new System.Drawing.Point(116, 226);
             this.channel5_txt.Name = "channel5_txt";
-            this.channel5_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel5_txt.Size = new System.Drawing.Size(319, 23);
             this.channel5_txt.TabIndex = 13;
             // 
             // channel4_txt
             // 
             this.channel4_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel4_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel4_txt.Location = new System.Drawing.Point(121, 173);
+            this.channel4_txt.Location = new System.Drawing.Point(116, 173);
             this.channel4_txt.Name = "channel4_txt";
-            this.channel4_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel4_txt.Size = new System.Drawing.Size(319, 23);
             this.channel4_txt.TabIndex = 10;
             // 
             // channel3_txt
             // 
             this.channel3_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel3_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel3_txt.Location = new System.Drawing.Point(121, 119);
+            this.channel3_txt.Location = new System.Drawing.Point(116, 119);
             this.channel3_txt.Name = "channel3_txt";
-            this.channel3_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel3_txt.Size = new System.Drawing.Size(319, 23);
             this.channel3_txt.TabIndex = 7;
             // 
             // channel2_txt
             // 
             this.channel2_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel2_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel2_txt.Location = new System.Drawing.Point(121, 66);
+            this.channel2_txt.Location = new System.Drawing.Point(116, 66);
             this.channel2_txt.Name = "channel2_txt";
-            this.channel2_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel2_txt.Size = new System.Drawing.Size(319, 23);
             this.channel2_txt.TabIndex = 4;
             // 
             // channel1_txt
             // 
             this.channel1_txt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.channel1_txt.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.channel1_txt.Location = new System.Drawing.Point(121, 14);
+            this.channel1_txt.Location = new System.Drawing.Point(116, 14);
             this.channel1_txt.Name = "channel1_txt";
-            this.channel1_txt.Size = new System.Drawing.Size(335, 23);
+            this.channel1_txt.Size = new System.Drawing.Size(319, 23);
             this.channel1_txt.TabIndex = 1;
             // 
             // channel2_chk
@@ -1416,7 +1517,7 @@
             this.channel2_chk.AutoSize = true;
             this.channel2_chk.Location = new System.Drawing.Point(3, 67);
             this.channel2_chk.Name = "channel2_chk";
-            this.channel2_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel2_chk.Size = new System.Drawing.Size(107, 21);
             this.channel2_chk.TabIndex = 5;
             this.channel2_chk.Text = "Channel 2";
             this.channel2_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1429,7 +1530,7 @@
             this.channel3_chk.AutoSize = true;
             this.channel3_chk.Location = new System.Drawing.Point(3, 120);
             this.channel3_chk.Name = "channel3_chk";
-            this.channel3_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel3_chk.Size = new System.Drawing.Size(107, 21);
             this.channel3_chk.TabIndex = 8;
             this.channel3_chk.Text = "Channel 3";
             this.channel3_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1442,7 +1543,7 @@
             this.channel4_chk.AutoSize = true;
             this.channel4_chk.Location = new System.Drawing.Point(3, 174);
             this.channel4_chk.Name = "channel4_chk";
-            this.channel4_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel4_chk.Size = new System.Drawing.Size(107, 21);
             this.channel4_chk.TabIndex = 11;
             this.channel4_chk.Text = "Channel 4";
             this.channel4_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1455,7 +1556,7 @@
             this.channel8_chk.AutoSize = true;
             this.channel8_chk.Location = new System.Drawing.Point(3, 380);
             this.channel8_chk.Name = "channel8_chk";
-            this.channel8_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel8_chk.Size = new System.Drawing.Size(107, 21);
             this.channel8_chk.TabIndex = 23;
             this.channel8_chk.Text = "Channel 8";
             this.channel8_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1468,7 +1569,7 @@
             this.channel7_chk.AutoSize = true;
             this.channel7_chk.Location = new System.Drawing.Point(3, 329);
             this.channel7_chk.Name = "channel7_chk";
-            this.channel7_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel7_chk.Size = new System.Drawing.Size(107, 21);
             this.channel7_chk.TabIndex = 20;
             this.channel7_chk.Text = "Channel 7";
             this.channel7_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1481,7 +1582,7 @@
             this.channel6_chk.AutoSize = true;
             this.channel6_chk.Location = new System.Drawing.Point(3, 278);
             this.channel6_chk.Name = "channel6_chk";
-            this.channel6_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel6_chk.Size = new System.Drawing.Size(107, 21);
             this.channel6_chk.TabIndex = 17;
             this.channel6_chk.Text = "Channel 6";
             this.channel6_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1494,7 +1595,7 @@
             this.channel5_chk.AutoSize = true;
             this.channel5_chk.Location = new System.Drawing.Point(3, 227);
             this.channel5_chk.Name = "channel5_chk";
-            this.channel5_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel5_chk.Size = new System.Drawing.Size(107, 21);
             this.channel5_chk.TabIndex = 14;
             this.channel5_chk.Text = "Channel 5";
             this.channel5_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1507,7 +1608,7 @@
             this.channel9_chk.AutoSize = true;
             this.channel9_chk.Location = new System.Drawing.Point(3, 434);
             this.channel9_chk.Name = "channel9_chk";
-            this.channel9_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel9_chk.Size = new System.Drawing.Size(107, 21);
             this.channel9_chk.TabIndex = 26;
             this.channel9_chk.Text = "Channel 9";
             this.channel9_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1520,7 +1621,7 @@
             this.channel1_chk.AutoSize = true;
             this.channel1_chk.Location = new System.Drawing.Point(3, 15);
             this.channel1_chk.Name = "channel1_chk";
-            this.channel1_chk.Size = new System.Drawing.Size(112, 21);
+            this.channel1_chk.Size = new System.Drawing.Size(107, 21);
             this.channel1_chk.TabIndex = 2;
             this.channel1_chk.Text = "Channel 1";
             this.channel1_chk.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1530,7 +1631,7 @@
             // Browse_PB9
             // 
             this.Browse_PB9.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB9.Image")));
-            this.Browse_PB9.Location = new System.Drawing.Point(484, 426);
+            this.Browse_PB9.Location = new System.Drawing.Point(463, 426);
             this.Browse_PB9.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB9.Name = "Browse_PB9";
             this.Browse_PB9.Size = new System.Drawing.Size(30, 32);
@@ -1544,7 +1645,7 @@
             // Browse_PB8
             // 
             this.Browse_PB8.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB8.Image")));
-            this.Browse_PB8.Location = new System.Drawing.Point(484, 376);
+            this.Browse_PB8.Location = new System.Drawing.Point(463, 376);
             this.Browse_PB8.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB8.Name = "Browse_PB8";
             this.Browse_PB8.Size = new System.Drawing.Size(30, 32);
@@ -1558,7 +1659,7 @@
             // Browse_PB4
             // 
             this.Browse_PB4.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB4.Image")));
-            this.Browse_PB4.Location = new System.Drawing.Point(484, 168);
+            this.Browse_PB4.Location = new System.Drawing.Point(463, 168);
             this.Browse_PB4.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB4.Name = "Browse_PB4";
             this.Browse_PB4.Size = new System.Drawing.Size(30, 32);
@@ -1572,7 +1673,7 @@
             // Browse_PB6
             // 
             this.Browse_PB6.Image = ((System.Drawing.Image)(resources.GetObject("Browse_PB6.Image")));
-            this.Browse_PB6.Location = new System.Drawing.Point(484, 274);
+            this.Browse_PB6.Location = new System.Drawing.Point(463, 274);
             this.Browse_PB6.Margin = new System.Windows.Forms.Padding(25, 10, 3, 3);
             this.Browse_PB6.Name = "Browse_PB6";
             this.Browse_PB6.Size = new System.Drawing.Size(30, 32);
@@ -1587,9 +1688,9 @@
             // 
             this.PB_Check2.BackColor = System.Drawing.Color.Transparent;
             this.PB_Check2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PB_Check2.Location = new System.Drawing.Point(590, 55);
+            this.PB_Check2.Location = new System.Drawing.Point(566, 55);
             this.PB_Check2.Name = "PB_Check2";
-            this.PB_Check2.Size = new System.Drawing.Size(54, 46);
+            this.PB_Check2.Size = new System.Drawing.Size(53, 46);
             this.PB_Check2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_Check2.TabIndex = 909;
             this.PB_Check2.TabStop = false;
@@ -1597,7 +1698,7 @@
             // PB1_Download
             // 
             this.PB1_Download.Image = global::ImageScroller.Properties.Resources.Download_30_Gry;
-            this.PB1_Download.Location = new System.Drawing.Point(539, 10);
+            this.PB1_Download.Location = new System.Drawing.Point(515, 10);
             this.PB1_Download.Margin = new System.Windows.Forms.Padding(10, 10, 3, 3);
             this.PB1_Download.Name = "PB1_Download";
             this.PB1_Download.Size = new System.Drawing.Size(30, 32);
@@ -1842,6 +1943,15 @@
         private System.Windows.Forms.PictureBox PB4_Download;
         private System.Windows.Forms.PictureBox PB3_Download;
         private System.Windows.Forms.PictureBox PB2_Download;
+        private System.Windows.Forms.Label lab_per2;
+        private System.Windows.Forms.Label lab_per1;
+        private System.Windows.Forms.Label lab_per9;
+        private System.Windows.Forms.Label lab_per8;
+        private System.Windows.Forms.Label lab_per7;
+        private System.Windows.Forms.Label lab_per6;
+        private System.Windows.Forms.Label lab_per5;
+        private System.Windows.Forms.Label lab_per4;
+        private System.Windows.Forms.Label lab_per3;
     }
 }
 

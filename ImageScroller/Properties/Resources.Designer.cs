@@ -273,26 +273,6 @@ namespace ImageScroller.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Backward_30_Gry {
-            get {
-                object obj = ResourceManager.GetObject("Backward-30-Gry", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Backward_30_Org {
-            get {
-                object obj = ResourceManager.GetObject("Backward-30-Org", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Browse_30_gry {
             get {
                 object obj = ResourceManager.GetObject("Browse_30_gry", resourceCulture);
